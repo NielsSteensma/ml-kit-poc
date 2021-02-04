@@ -22,11 +22,13 @@
 		11E1BB9C1CF1371A0057E18F /* GridViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E1BB9A1CF1371A0057E18F /* GridViewCell.swift */; };
 		11E1BB9E1CF137450057E18F /* AssetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E1BB9D1CF137450057E18F /* AssetViewController.swift */; };
 		11E1BB9F1CF137450057E18F /* AssetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E1BB9D1CF137450057E18F /* AssetViewController.swift */; };
+		125FC3A3A24D47E1E506B6E1 /* Pods_MLKitPoc_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98A5108A2450C884364940EB /* Pods_MLKitPoc_iOS.framework */; };
+		8201CE4BDF8D42C8983E7A77 /* Pods_MLKitPoc_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1992356C7E0DDBF7E7483FD /* Pods_MLKitPoc_tvOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0A4565D6CD362A6B9B8A1288 /* SampleCode.xcconfig */ = {isa = PBXFileReference; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
-		118FE1121CEF0525004F2F51 /* PhotoBrowse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoBrowse.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A4565D6CD362A6B9B8A1288 /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
+		118FE1121CEF0525004F2F51 /* MLKitPoc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLKitPoc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		118FE1151CEF0525004F2F51 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		118FE1171CEF0525004F2F51 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MasterViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		118FE1191CEF0525004F2F51 /* AssetGridViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetGridViewController.swift; sourceTree = "<group>"; };
@@ -34,14 +36,24 @@
 		118FE11E1CEF0525004F2F51 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		118FE1211CEF0525004F2F51 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		118FE1231CEF0525004F2F51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		118FE12D1CEF07DE004F2F51 /* PhotoBrowse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoBrowse.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		118FE12D1CEF07DE004F2F51 /* MLKitPoc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLKitPoc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		118FE1341CEF07DE004F2F51 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		118FE1361CEF07DE004F2F51 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		118FE1381CEF07DE004F2F51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		119E70161CF3CC1700F01BF5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		11E1BB9A1CF1371A0057E18F /* GridViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridViewCell.swift; sourceTree = "<group>"; };
 		11E1BB9D1CF137450057E18F /* AssetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AssetViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		595AD1A071A236344A7705F6 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE.txt; sourceTree = "<group>"; };
+		1B820D4CBB646950B5F11A8C /* Pods-PhotoBrowse tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoBrowse tvOS.release.xcconfig"; path = "Target Support Files/Pods-PhotoBrowse tvOS/Pods-PhotoBrowse tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		473D78CC8C1443E44E5EDB40 /* Pods-PhotoBrowse tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoBrowse tvOS.debug.xcconfig"; path = "Target Support Files/Pods-PhotoBrowse tvOS/Pods-PhotoBrowse tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		595AD1A071A236344A7705F6 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		91B7E7C63C91F445F64FDEFE /* Pods-MLKitPoc tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLKitPoc tvOS.release.xcconfig"; path = "Target Support Files/Pods-MLKitPoc tvOS/Pods-MLKitPoc tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		98A5108A2450C884364940EB /* Pods_MLKitPoc_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MLKitPoc_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A91B5A4E5CDD074302DAF2F9 /* Pods-MLKitPoc iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLKitPoc iOS.release.xcconfig"; path = "Target Support Files/Pods-MLKitPoc iOS/Pods-MLKitPoc iOS.release.xcconfig"; sourceTree = "<group>"; };
+		B10FC121852C268008CBC0B2 /* Pods-PhotoBrowse iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoBrowse iOS.release.xcconfig"; path = "Target Support Files/Pods-PhotoBrowse iOS/Pods-PhotoBrowse iOS.release.xcconfig"; sourceTree = "<group>"; };
+		B9985AA18D9FB8365E43B0AB /* Pods-MLKitPoc iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLKitPoc iOS.debug.xcconfig"; path = "Target Support Files/Pods-MLKitPoc iOS/Pods-MLKitPoc iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		C8F473CAF7C3A576C3D346BE /* Pods-PhotoBrowse iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoBrowse iOS.debug.xcconfig"; path = "Target Support Files/Pods-PhotoBrowse iOS/Pods-PhotoBrowse iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		D1992356C7E0DDBF7E7483FD /* Pods_MLKitPoc_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MLKitPoc_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE9368EF8CD464CCBE08259D /* Pods-MLKitPoc tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLKitPoc tvOS.debug.xcconfig"; path = "Target Support Files/Pods-MLKitPoc tvOS/Pods-MLKitPoc tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				125FC3A3A24D47E1E506B6E1 /* Pods_MLKitPoc_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8201CE4BDF8D42C8983E7A77 /* Pods_MLKitPoc_tvOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,14 +86,16 @@
 				118FE1131CEF0525004F2F51 /* Products */,
 				F2FC21B092134D81E4A005FE /* Configuration */,
 				6BDCEA721C0B3AADC4B429F4 /* LICENSE */,
+				B2BD69FA6225607A1502BDA9 /* Pods */,
+				5B882C5A7F284B5A47D211E6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		118FE1131CEF0525004F2F51 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				118FE1121CEF0525004F2F51 /* PhotoBrowse.app */,
-				118FE12D1CEF07DE004F2F51 /* PhotoBrowse.app */,
+				118FE1121CEF0525004F2F51 /* MLKitPoc.app */,
+				118FE12D1CEF07DE004F2F51 /* MLKitPoc.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -117,13 +133,36 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
+		5B882C5A7F284B5A47D211E6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				98A5108A2450C884364940EB /* Pods_MLKitPoc_iOS.framework */,
+				D1992356C7E0DDBF7E7483FD /* Pods_MLKitPoc_tvOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		6BDCEA721C0B3AADC4B429F4 /* LICENSE */ = {
 			isa = PBXGroup;
 			children = (
 				595AD1A071A236344A7705F6 /* LICENSE.txt */,
 			);
-			name = LICENSE;
 			path = LICENSE;
+			sourceTree = "<group>";
+		};
+		B2BD69FA6225607A1502BDA9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C8F473CAF7C3A576C3D346BE /* Pods-PhotoBrowse iOS.debug.xcconfig */,
+				B10FC121852C268008CBC0B2 /* Pods-PhotoBrowse iOS.release.xcconfig */,
+				473D78CC8C1443E44E5EDB40 /* Pods-PhotoBrowse tvOS.debug.xcconfig */,
+				1B820D4CBB646950B5F11A8C /* Pods-PhotoBrowse tvOS.release.xcconfig */,
+				B9985AA18D9FB8365E43B0AB /* Pods-MLKitPoc iOS.debug.xcconfig */,
+				A91B5A4E5CDD074302DAF2F9 /* Pods-MLKitPoc iOS.release.xcconfig */,
+				FE9368EF8CD464CCBE08259D /* Pods-MLKitPoc tvOS.debug.xcconfig */,
+				91B7E7C63C91F445F64FDEFE /* Pods-MLKitPoc tvOS.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		F2FC21B092134D81E4A005FE /* Configuration */ = {
@@ -137,27 +176,31 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		118FE1111CEF0525004F2F51 /* PhotoBrowse iOS */ = {
+		118FE1111CEF0525004F2F51 /* MLKitPoc iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 118FE1261CEF0525004F2F51 /* Build configuration list for PBXNativeTarget "PhotoBrowse iOS" */;
+			buildConfigurationList = 118FE1261CEF0525004F2F51 /* Build configuration list for PBXNativeTarget "MLKitPoc iOS" */;
 			buildPhases = (
+				02EF8ADE0187F686D30CAD4E /* [CP] Check Pods Manifest.lock */,
 				118FE10E1CEF0525004F2F51 /* Sources */,
 				118FE10F1CEF0525004F2F51 /* Frameworks */,
 				118FE1101CEF0525004F2F51 /* Resources */,
+				BFEBF2AE94949701943F8794 /* [CP] Embed Pods Frameworks */,
+				8E3A2FF6C8FA0A5E3232866A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "PhotoBrowse iOS";
+			name = "MLKitPoc iOS";
 			productName = SamplePhotosApp;
-			productReference = 118FE1121CEF0525004F2F51 /* PhotoBrowse.app */;
+			productReference = 118FE1121CEF0525004F2F51 /* MLKitPoc.app */;
 			productType = "com.apple.product-type.application";
 		};
-		118FE12C1CEF07DE004F2F51 /* PhotoBrowse tvOS */ = {
+		118FE12C1CEF07DE004F2F51 /* MLKitPoc tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 118FE1391CEF07DE004F2F51 /* Build configuration list for PBXNativeTarget "PhotoBrowse tvOS" */;
+			buildConfigurationList = 118FE1391CEF07DE004F2F51 /* Build configuration list for PBXNativeTarget "MLKitPoc tvOS" */;
 			buildPhases = (
+				9D9DC649B42715CFA497C080 /* [CP] Check Pods Manifest.lock */,
 				118FE1291CEF07DE004F2F51 /* Sources */,
 				118FE12A1CEF07DE004F2F51 /* Frameworks */,
 				118FE12B1CEF07DE004F2F51 /* Resources */,
@@ -166,9 +209,9 @@
 			);
 			dependencies = (
 			);
-			name = "PhotoBrowse tvOS";
+			name = "MLKitPoc tvOS";
 			productName = SamplePhotosApp;
-			productReference = 118FE12D1CEF07DE004F2F51 /* PhotoBrowse.app */;
+			productReference = 118FE12D1CEF07DE004F2F51 /* MLKitPoc.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -178,11 +221,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = Apple;
 				TargetAttributes = {
 					118FE1111CEF0525004F2F51 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = MHBCWAP4T7;
 						LastSwiftMigration = 1140;
 						ProvisioningStyle = Automatic;
 					};
@@ -193,7 +237,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 118FE10D1CEF0525004F2F51 /* Build configuration list for PBXProject "PhotoBrowse" */;
+			buildConfigurationList = 118FE10D1CEF0525004F2F51 /* Build configuration list for PBXProject "MLKitPoc" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -206,8 +250,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				118FE1111CEF0525004F2F51 /* PhotoBrowse iOS */,
-				118FE12C1CEF07DE004F2F51 /* PhotoBrowse tvOS */,
+				118FE1111CEF0525004F2F51 /* MLKitPoc iOS */,
+				118FE12C1CEF07DE004F2F51 /* MLKitPoc tvOS */,
 			);
 		};
 /* End PBXProject section */
@@ -233,6 +277,101 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		02EF8ADE0187F686D30CAD4E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MLKitPoc iOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8E3A2FF6C8FA0A5E3232866A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MLKitPoc iOS/Pods-MLKitPoc iOS-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/MLKitFaceDetection/GoogleMVFaceDetectorResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMVFaceDetectorResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MLKitPoc iOS/Pods-MLKitPoc iOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9D9DC649B42715CFA497C080 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MLKitPoc tvOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BFEBF2AE94949701943F8794 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MLKitPoc iOS/Pods-MLKitPoc iOS-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MLKitPoc iOS/Pods-MLKitPoc iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		118FE10E1CEF0525004F2F51 /* Sources */ = {
@@ -291,7 +430,6 @@
 /* Begin XCBuildConfiguration section */
 		118FE1241CEF0525004F2F51 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0A4565D6CD362A6B9B8A1288 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -314,6 +452,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -338,7 +477,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -351,7 +490,6 @@
 		};
 		118FE1251CEF0525004F2F51 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0A4565D6CD362A6B9B8A1288 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -374,6 +512,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -392,7 +531,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -404,14 +543,14 @@
 		};
 		118FE1271CEF0525004F2F51 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0A4565D6CD362A6B9B8A1288 /* SampleCode.xcconfig */;
+			baseConfigurationReference = B9985AA18D9FB8365E43B0AB /* Pods-MLKitPoc iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = MHBCWAP4T7;
 				INFOPLIST_FILE = iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.PhotoBrowse${SAMPLE_CODE_DISAMBIGUATOR}";
-				PRODUCT_NAME = PhotoBrowse;
+				PRODUCT_BUNDLE_IDENTIFIER = com.MLKitPoc;
+				PRODUCT_NAME = MLKitPoc;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};
@@ -419,14 +558,14 @@
 		};
 		118FE1281CEF0525004F2F51 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0A4565D6CD362A6B9B8A1288 /* SampleCode.xcconfig */;
+			baseConfigurationReference = A91B5A4E5CDD074302DAF2F9 /* Pods-MLKitPoc iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = MHBCWAP4T7;
 				INFOPLIST_FILE = iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.PhotoBrowse${SAMPLE_CODE_DISAMBIGUATOR}";
-				PRODUCT_NAME = PhotoBrowse;
+				PRODUCT_BUNDLE_IDENTIFIER = com.MLKitPoc;
+				PRODUCT_NAME = MLKitPoc;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};
@@ -434,15 +573,15 @@
 		};
 		118FE13A1CEF07DE004F2F51 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0A4565D6CD362A6B9B8A1288 /* SampleCode.xcconfig */;
+			baseConfigurationReference = FE9368EF8CD464CCBE08259D /* Pods-MLKitPoc tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = tvOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.PhotoBrowse${SAMPLE_CODE_DISAMBIGUATOR}";
-				PRODUCT_NAME = PhotoBrowse;
+				PRODUCT_BUNDLE_IDENTIFIER = com.MLKitPoc.tv;
+				PRODUCT_NAME = MLKitPoc;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
 				SWIFT_VERSION = 5.0;
@@ -452,15 +591,15 @@
 		};
 		118FE13B1CEF07DE004F2F51 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0A4565D6CD362A6B9B8A1288 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 91B7E7C63C91F445F64FDEFE /* Pods-MLKitPoc tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = tvOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.PhotoBrowse${SAMPLE_CODE_DISAMBIGUATOR}";
-				PRODUCT_NAME = PhotoBrowse;
+				PRODUCT_BUNDLE_IDENTIFIER = com.MLKitPoc.tv;
+				PRODUCT_NAME = MLKitPoc;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
 				SWIFT_VERSION = 5.0;
@@ -471,7 +610,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		118FE10D1CEF0525004F2F51 /* Build configuration list for PBXProject "PhotoBrowse" */ = {
+		118FE10D1CEF0525004F2F51 /* Build configuration list for PBXProject "MLKitPoc" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				118FE1241CEF0525004F2F51 /* Debug */,
@@ -480,7 +619,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		118FE1261CEF0525004F2F51 /* Build configuration list for PBXNativeTarget "PhotoBrowse iOS" */ = {
+		118FE1261CEF0525004F2F51 /* Build configuration list for PBXNativeTarget "MLKitPoc iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				118FE1271CEF0525004F2F51 /* Debug */,
@@ -489,7 +628,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		118FE1391CEF07DE004F2F51 /* Build configuration list for PBXNativeTarget "PhotoBrowse tvOS" */ = {
+		118FE1391CEF07DE004F2F51 /* Build configuration list for PBXNativeTarget "MLKitPoc tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				118FE13A1CEF07DE004F2F51 /* Debug */,

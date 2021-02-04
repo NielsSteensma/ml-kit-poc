@@ -7,6 +7,7 @@ Implements the main view controller for album navigation.
 
 import UIKit
 import Photos
+import CoreML
 
 class MasterViewController: UITableViewController {
     
