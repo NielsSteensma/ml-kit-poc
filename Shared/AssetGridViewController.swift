@@ -8,6 +8,7 @@ Implements the view controller for browsing photos in a grid layout.
 import UIKit
 import Photos
 import PhotosUI
+import CoreData
 
 private extension UICollectionView {
     func indexPathsForElements(in rect: CGRect) -> [IndexPath] {
@@ -104,11 +105,7 @@ class AssetGridViewController: UICollectionViewController {
         // Dequeue a GridViewCell.
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GridViewCell", for: indexPath) as? GridViewCell
             else { fatalError("Unexpected cell in collection view") }
-        
-        // Add a badge to the cell if the PHAsset represents a Live Photo.
-        if asset.mediaSubtypes.contains(.photoLive) {
-            cell.livePhotoBadgeImage = PHLivePhotoView.livePhotoBadgeImage(options: .overContent)
-        }
+
         
         // Request an image for the asset from the PHCachingImageManager.
         cell.representedAssetIdentifier = asset.localIdentifier
@@ -119,6 +116,24 @@ class AssetGridViewController: UICollectionViewController {
                 cell.thumbnailImage = image
             }
         })
+
+        // Request the faceId of the image
+        if let delegate = UIApplication.shared.delegate as? AppDelegate {
+            let context = delegate.persistentContainer.viewContext
+            let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Asset")
+            fetchRequest.predicate = NSPredicate(format: "localId == %@", asset.localIdentifier)
+            do {
+                let foundAsset = try context.fetch(fetchRequest)
+                if let asset = foundAsset.first,
+                   let faceId = asset.value(forKey: "faceId") as? Int,
+                   let faces = asset.value(forKey: "amountOfFaces") as? Int {
+                    cell.faceId.text = faceId != 0 ? String(faceId) : ""
+                    cell.faces.text = faces != 0 ? String(faces) : ""
+                }
+            } catch {
+                // Ignore it
+            }
+        }
         return cell
     }
     
@@ -190,33 +205,6 @@ class AssetGridViewController: UICollectionViewController {
             return ([new], [old])
         }
     }
-    
-    // MARK: UI Actions
-    /// - Tag: AddAsset
-    @IBAction func addAsset(_ sender: AnyObject?) {
-        
-        // Create a dummy image of a random solid color and random orientation.
-        let size = (arc4random_uniform(2) == 0) ?
-            CGSize(width: 400, height: 300) :
-            CGSize(width: 300, height: 400)
-        let renderer = UIGraphicsImageRenderer(size: size)
-        let image = renderer.image { context in
-            UIColor(hue: CGFloat(arc4random_uniform(100)) / 100,
-                    saturation: 1, brightness: 1, alpha: 1).setFill()
-            context.fill(context.format.bounds)
-        }
-        // Add the asset to the photo library.
-        PHPhotoLibrary.shared().performChanges({
-            let creationRequest = PHAssetChangeRequest.creationRequestForAsset(from: image)
-            if let assetCollection = self.assetCollection {
-                let addAssetRequest = PHAssetCollectionChangeRequest(for: assetCollection)
-                addAssetRequest?.addAssets([creationRequest.placeholderForCreatedAsset!] as NSArray)
-            }
-        }, completionHandler: {success, error in
-            if !success { print("Error creating the asset: \(String(describing: error))") }
-        })
-    }
-    
 }
 
 // MARK: PHPhotoLibraryChangeObserver
