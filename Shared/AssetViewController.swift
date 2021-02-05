@@ -15,6 +15,7 @@ class AssetViewController: UIViewController {
     @IBOutlet weak var progressView: UIProgressView!
 
     private var image: UIImage!
+    private let faceDetection = FaceDetection()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +68,19 @@ class AssetViewController: UIViewController {
                                                 self.image = image
                                                 self.imageView.image = image
         })
+    }
+
+    @IBAction func showMLKitResults(_ sender: UIBarButtonItem) {
+        let imageToAnalyze = MLKitImage(uiImage: image, asset: asset)
+        faceDetection.detect(for: imageToAnalyze) { [weak self] results in
+            var faceIds = ""
+            results.trackingIds.forEach{faceIds = faceIds + String($0)}
+            let alertController = UIAlertController(title: "MLKit results",
+                                                    message: "Amount of detected faces: \(results.amountOfFaces) \n \(faceIds)",
+                                                    preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Okay", style: .default))
+            self?.present(alertController, animated: false, completion: {})
+        }
     }
 }
 
