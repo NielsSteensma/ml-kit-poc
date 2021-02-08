@@ -6,45 +6,50 @@
 //  Copyright © 2021 Apple. All rights reserved.
 //
 
-import Foundation
 import Photos
 import UIKit
 import CoreData
+import Dispatch
 
 class FaceDetectionRunner {
     typealias CompletionHandler = () -> Void
     private let faceDetection = FaceDetection()
+    private static let DISPATCH_QUEUE_LABEL = "com.mlkitpoc.analysis"
     private static let TAG = "FaceDetectionRunner"
 
     func run(for collection: PHAssetCollection, completion: @escaping CompletionHandler) {
         Logger.log(tag: FaceDetectionRunner.TAG, message: "Start for collection \(collection.localizedTitle ?? "")")
         cleanupOldAnalysisData()
-        self.analyze(collection: collection, completion: completion)
-    }
 
-    private func analyze(collection: PHAssetCollection, completion: @escaping CompletionHandler) {
         let assets = PHAsset.fetchAssets(in: collection, options: nil)
 
+        // Run the analysis on a serial queue so we get most accurate face tracking results.
+        let serialQueue = DispatchQueue(label: FaceDetectionRunner.DISPATCH_QUEUE_LABEL)
         for i in 0..<assets.count {
-            let asset = assets[i]
-            PHImageManager.default().requestImageForFaceDetection(for: asset) { [weak self] image in
-                guard let self = self, let image = image else {
-                    if i == assets.count - 1 {
-                        // Make sure to call completion handler for last processed image
-                        completion()
-                    }
-                    return
-                }
+            serialQueue.async {
+                let dispatchGroup = DispatchGroup()
+                dispatchGroup.enter()
+                self.analyse(asset: assets[i], dispatchGroup: dispatchGroup)
 
-                let mlKitImage = MLKitImage(uiImage: image, asset: asset)
-                self.faceDetection.detect(for: mlKitImage) { _ in
-                    // Make sure to call completion handler for last processed image
-                    if i == assets.count - 1 {
-                        completion()
-                    }
+                // If we processed last asset we want to invoke the completionhandler
+                if i == assets.count - 1 {
+                    completion()
                 }
             }
         }
+    }
+
+    private func analyse(asset: PHAsset, dispatchGroup: DispatchGroup) {
+        PHImageManager.default().requestImageForFaceDetection(for: asset) { [weak self] image in
+            guard let self = self, let image = image else {
+                return
+            }
+
+            let mlKitImage = MLKitImage(uiImage: image, asset: asset)
+            self.faceDetection.detect(for: mlKitImage, dispatchGroup: dispatchGroup)
+        }
+
+        dispatchGroup.wait()
     }
 
     private func cleanupOldAnalysisData() {

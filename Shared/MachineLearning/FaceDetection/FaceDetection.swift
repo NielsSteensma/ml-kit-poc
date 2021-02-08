@@ -30,7 +30,7 @@ class FaceDetection {
         self.faceDetector = FaceDetector.faceDetector(options: options)
     }
 
-    func detect(for image: MLKitImage, completion: FaceDetectionResultsHandler? = nil) {
+    func detect(for image: MLKitImage, dispatchGroup: DispatchGroup) {
         Logger.log(tag: FaceDetection.TAG,
                    message: "start for image \(image.asset.localIdentifier) " +
                             "with dimensions of \(image.uiImage.size)")
@@ -49,7 +49,7 @@ class FaceDetection {
 
             let results = sSelf.processResults(faces: faces)
             sSelf.saveInDB(mlKitImage: image, results: results)
-            completion?(results)
+            dispatchGroup.leave()
         }
     }
 

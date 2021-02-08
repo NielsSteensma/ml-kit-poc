@@ -51,7 +51,9 @@ class AssetGridViewController: UICollectionViewController {
 
         faceDetectionRunner.run(for: assetCollection) { [weak self] in
             guard let self = self else { return }
-            self.collectionView.reloadData()
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
         }
     }
     
