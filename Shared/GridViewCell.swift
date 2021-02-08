@@ -24,5 +24,7 @@ class GridViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         imageView.image = nil
+        faceId.text = ""
+        faces.text = ""
     }
 }

@@ -18,6 +18,8 @@ private extension UICollectionView {
 }
 
 class AssetGridViewController: UICollectionViewController {
+    private let faceDetectionRunner = FaceDetectionRunner()
+    private let cellConfigurator = AssetGridCellConfigurator()
     
     var fetchResult: PHFetchResult<PHAsset>!
     var assetCollection: PHAssetCollection!
@@ -45,6 +47,11 @@ class AssetGridViewController: UICollectionViewController {
             let allPhotosOptions = PHFetchOptions()
             allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
             fetchResult = PHAsset.fetchAssets(with: allPhotosOptions)
+        }
+
+        faceDetectionRunner.run(for: assetCollection) { [weak self] in
+            guard let self = self else { return }
+            self.collectionView.reloadData()
         }
     }
     
@@ -99,41 +106,14 @@ class AssetGridViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return fetchResult.count
     }
-    /// - Tag: PopulateCell
+
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let asset = fetchResult.object(at: indexPath.item)
         // Dequeue a GridViewCell.
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GridViewCell", for: indexPath) as? GridViewCell
             else { fatalError("Unexpected cell in collection view") }
 
-        
-        // Request an image for the asset from the PHCachingImageManager.
-        cell.representedAssetIdentifier = asset.localIdentifier
-        imageManager.requestImage(for: asset, targetSize: thumbnailSize, contentMode: .aspectFill, options: nil, resultHandler: { image, _ in
-            // UIKit may have recycled this cell by the handler's activation time.
-            // Set the cell's thumbnail image only if it's still showing the same asset.
-            if cell.representedAssetIdentifier == asset.localIdentifier {
-                cell.thumbnailImage = image
-            }
-        })
-
-        // Request the faceId of the image
-        if let delegate = UIApplication.shared.delegate as? AppDelegate {
-            let context = delegate.persistentContainer.viewContext
-            let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Asset")
-            fetchRequest.predicate = NSPredicate(format: "localId == %@", asset.localIdentifier)
-            do {
-                let foundAsset = try context.fetch(fetchRequest)
-                if let asset = foundAsset.first,
-                   let faceId = asset.value(forKey: "faceId") as? Int,
-                   let faces = asset.value(forKey: "amountOfFaces") as? Int {
-                    cell.faceId.text = faceId != 0 ? String(faceId) : ""
-                    cell.faces.text = faces != 0 ? String(faces) : ""
-                }
-            } catch {
-                // Ignore it
-            }
-        }
+        cellConfigurator.configure(for: cell, with: asset, thumbnailSize: self.thumbnailSize)
         return cell
     }
     

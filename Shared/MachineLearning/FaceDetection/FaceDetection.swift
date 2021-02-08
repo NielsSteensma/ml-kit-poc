@@ -14,8 +14,14 @@ import CoreData
   Algorithm that runs MLKit on the given picture and returns all faces that were detected.
  */
 class FaceDetection {
+    typealias FaceDetectionResultsHandler = ((_ results: Result) -> Void)
     private let faceDetector: FaceDetector
     private static let TAG = "FaceDetection"
+
+    struct Result {
+        let amountOfFaces: Int
+        let trackingIds: [Int]
+    }
 
     init() {
         let options = FaceDetectorOptions()
@@ -24,12 +30,7 @@ class FaceDetection {
         self.faceDetector = FaceDetector.faceDetector(options: options)
     }
 
-    struct Results {
-        let amountOfFaces: Int
-        let trackingIds: [Int]
-    }
-
-    func detect(for image: MLKitImage, completion: @escaping (_ results: Results) -> Void) {
+    func detect(for image: MLKitImage, completion: FaceDetectionResultsHandler? = nil) {
         Logger.log(tag: FaceDetection.TAG,
                    message: "start for image \(image.asset.localIdentifier) " +
                             "with dimensions of \(image.uiImage.size)")
@@ -48,50 +49,33 @@ class FaceDetection {
 
             let results = sSelf.processResults(faces: faces)
             sSelf.saveInDB(mlKitImage: image, results: results)
-            completion(results)
+            completion?(results)
         }
     }
 
-    private func processResults(faces: [Face]?) -> Results {
-        return Results(amountOfFaces: faces?.count ?? 0,
+    private func processResults(faces: [Face]?) -> Result {
+        return Result(amountOfFaces: faces?.count ?? 0,
                        trackingIds: faces?.map{ $0.trackingID } ?? [])
     }
 
-    private func saveInDB(mlKitImage: MLKitImage, results: Results) {
-        guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
+    private func saveInDB(mlKitImage: MLKitImage, results: Result) {
+        let context = DBHelper.getViewContext()
 
-        let context = delegate.persistentContainer.viewContext
+        context.performAndWait {
+            let asset = NSEntityDescription.insertNewObject(forEntityName: "Asset", into: context)
+            asset.setValue(mlKitImage.asset.localIdentifier, forKey: "localId")
+            asset.setValue(results.amountOfFaces, forKey: "amountOfFaces")
+            if !results.trackingIds.isEmpty {
+                // For now just insert the first found faceId
+                asset.setValue(results.trackingIds[0], forKey: "faceId")
+            }
 
-        // Check if we already did perform an analysis for this asset
-        var foundAssets: [NSManagedObject]?
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Asset")
-        fetchRequest.predicate = NSPredicate(format: "localId == %@", mlKitImage.asset.localIdentifier)
-        do {
-            foundAssets = try context.fetch(fetchRequest)
-        } catch {
-            Logger.log(tag: FaceDetection.TAG, message: "Error while checking if asset already exists")
-        }
-
-        guard foundAssets!.isEmpty else {
-            Logger.log(tag: FaceDetection.TAG, message: "Found existing asset data")
-            return
-        }
-
-        // Insert the results for the asset
-        let asset = NSEntityDescription.insertNewObject(forEntityName: "Asset", into: context)
-        asset.setValue(mlKitImage.asset.localIdentifier, forKey: "localId")
-        asset.setValue(results.amountOfFaces, forKey: "amountOfFaces")
-        if !results.trackingIds.isEmpty {
-            // For now just insert the first found faceId
-            asset.setValue(results.trackingIds[0], forKey: "faceId")
-        }
-
-        do {
-            try context.save()
-        } catch {
-            Logger.log(tag: FaceDetection.TAG, message: "Error while saving asset")
+            do {
+                try context.save()
+                Logger.log(tag: FaceDetection.TAG, message: "Inserting analysis data")
+            } catch {
+                Logger.log(tag: FaceDetection.TAG, message: "Error while inserting analysis data")
+            }
         }
     }
 }
