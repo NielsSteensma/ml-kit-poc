@@ -12,10 +12,8 @@ class AssetViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var editButton: UIBarButtonItem!
-    @IBOutlet weak var progressView: UIProgressView!
 
     private var image: UIImage!
-    private let faceDetection = FaceDetection()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,35 +50,14 @@ class AssetViewController: UIViewController {
         options.deliveryMode = .highQualityFormat
         options.isNetworkAccessAllowed = true
         options.resizeMode = .none
-        options.progressHandler = { progress, _, _, _ in
-            // The handler may originate on a background queue, so
-            // re-dispatch to the main queue for UI work.
-            DispatchQueue.main.sync {
-                self.progressView.progress = Float(progress)
-            }
-        }
         
         PHImageManager.default().requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFit, options: options,
                                               resultHandler: { image, _ in
-                                                self.progressView.isHidden = true
 
                                                 guard let image = image else { return }
                                                 self.image = image
                                                 self.imageView.image = image
         })
-    }
-
-    @IBAction func showMLKitResults(_ sender: UIBarButtonItem) {
-        let imageToAnalyze = MLKitImage(uiImage: image, asset: asset)
-        faceDetection.detect(for: imageToAnalyze) { [weak self] results in
-            var faceIds = ""
-            results.trackingIds.forEach{faceIds = faceIds + String($0)}
-            let alertController = UIAlertController(title: "MLKit results",
-                                                    message: "Amount of detected faces: \(results.amountOfFaces) \n \(faceIds)",
-                                                    preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "Okay", style: .default))
-            self?.present(alertController, animated: false, completion: {})
-        }
     }
 }
 
