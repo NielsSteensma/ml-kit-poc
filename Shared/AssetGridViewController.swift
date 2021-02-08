@@ -18,7 +18,6 @@ private extension UICollectionView {
 }
 
 class AssetGridViewController: UICollectionViewController {
-    private let faceDetectionRunner = FaceDetectionRunner()
     private let cellConfigurator = AssetGridCellConfigurator()
     
     var fetchResult: PHFetchResult<PHAsset>!
@@ -49,7 +48,7 @@ class AssetGridViewController: UICollectionViewController {
             fetchResult = PHAsset.fetchAssets(with: allPhotosOptions)
         }
 
-        faceDetectionRunner.run(for: assetCollection) { [weak self] in
+        FaceDetectionRunner.instance.run(for: assetCollection) { [weak self] in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.collectionView.reloadData()

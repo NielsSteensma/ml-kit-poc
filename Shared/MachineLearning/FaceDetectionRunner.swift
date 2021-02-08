@@ -13,9 +13,12 @@ import Dispatch
 
 class FaceDetectionRunner {
     typealias CompletionHandler = () -> Void
+    public static let instance = FaceDetectionRunner()
     private let faceDetection = FaceDetection()
     private static let DISPATCH_QUEUE_LABEL = "com.mlkitpoc.analysis"
     private static let TAG = "FaceDetectionRunner"
+
+    private init() {}
 
     func run(for collection: PHAssetCollection, completion: @escaping CompletionHandler) {
         Logger.log(tag: FaceDetectionRunner.TAG, message: "Start for collection \(collection.localizedTitle ?? "")")
