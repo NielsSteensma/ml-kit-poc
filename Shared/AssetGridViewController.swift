@@ -8,6 +8,7 @@ Implements the view controller for browsing photos in a grid layout.
 import UIKit
 import Photos
 import PhotosUI
+import CoreData
 
 private extension UICollectionView {
     func indexPathsForElements(in rect: CGRect) -> [IndexPath] {
@@ -17,6 +18,7 @@ private extension UICollectionView {
 }
 
 class AssetGridViewController: UICollectionViewController {
+    private let cellConfigurator = AssetGridCellConfigurator()
     
     var fetchResult: PHFetchResult<PHAsset>!
     var assetCollection: PHAssetCollection!
@@ -44,6 +46,13 @@ class AssetGridViewController: UICollectionViewController {
             let allPhotosOptions = PHFetchOptions()
             allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
             fetchResult = PHAsset.fetchAssets(with: allPhotosOptions)
+        }
+
+        FaceDetectionRunner.instance.run(for: assetCollection) { [weak self] in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
         }
     }
     
@@ -98,27 +107,14 @@ class AssetGridViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return fetchResult.count
     }
-    /// - Tag: PopulateCell
+
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let asset = fetchResult.object(at: indexPath.item)
         // Dequeue a GridViewCell.
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GridViewCell", for: indexPath) as? GridViewCell
             else { fatalError("Unexpected cell in collection view") }
-        
-        // Add a badge to the cell if the PHAsset represents a Live Photo.
-        if asset.mediaSubtypes.contains(.photoLive) {
-            cell.livePhotoBadgeImage = PHLivePhotoView.livePhotoBadgeImage(options: .overContent)
-        }
-        
-        // Request an image for the asset from the PHCachingImageManager.
-        cell.representedAssetIdentifier = asset.localIdentifier
-        imageManager.requestImage(for: asset, targetSize: thumbnailSize, contentMode: .aspectFill, options: nil, resultHandler: { image, _ in
-            // UIKit may have recycled this cell by the handler's activation time.
-            // Set the cell's thumbnail image only if it's still showing the same asset.
-            if cell.representedAssetIdentifier == asset.localIdentifier {
-                cell.thumbnailImage = image
-            }
-        })
+
+        cellConfigurator.configure(for: cell, with: asset, thumbnailSize: self.thumbnailSize)
         return cell
     }
     
@@ -190,33 +186,6 @@ class AssetGridViewController: UICollectionViewController {
             return ([new], [old])
         }
     }
-    
-    // MARK: UI Actions
-    /// - Tag: AddAsset
-    @IBAction func addAsset(_ sender: AnyObject?) {
-        
-        // Create a dummy image of a random solid color and random orientation.
-        let size = (arc4random_uniform(2) == 0) ?
-            CGSize(width: 400, height: 300) :
-            CGSize(width: 300, height: 400)
-        let renderer = UIGraphicsImageRenderer(size: size)
-        let image = renderer.image { context in
-            UIColor(hue: CGFloat(arc4random_uniform(100)) / 100,
-                    saturation: 1, brightness: 1, alpha: 1).setFill()
-            context.fill(context.format.bounds)
-        }
-        // Add the asset to the photo library.
-        PHPhotoLibrary.shared().performChanges({
-            let creationRequest = PHAssetChangeRequest.creationRequestForAsset(from: image)
-            if let assetCollection = self.assetCollection {
-                let addAssetRequest = PHAssetCollectionChangeRequest(for: assetCollection)
-                addAssetRequest?.addAssets([creationRequest.placeholderForCreatedAsset!] as NSArray)
-            }
-        }, completionHandler: {success, error in
-            if !success { print("Error creating the asset: \(String(describing: error))") }
-        })
-    }
-    
 }
 
 // MARK: PHPhotoLibraryChangeObserver

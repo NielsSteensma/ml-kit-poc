@@ -8,9 +8,10 @@ Implements the collection view cell for displaying an asset in the grid view.
 import UIKit
 
 class GridViewCell: UICollectionViewCell {
-    
+
     @IBOutlet var imageView: UIImageView!
-    @IBOutlet var livePhotoBadgeImageView: UIImageView!
+    @IBOutlet var faceId: UILabel!
+    @IBOutlet var faces: UILabel!
     
     var representedAssetIdentifier: String!
     
@@ -19,15 +20,11 @@ class GridViewCell: UICollectionViewCell {
             imageView.image = thumbnailImage
         }
     }
-    var livePhotoBadgeImage: UIImage! {
-        didSet {
-            livePhotoBadgeImageView.image = livePhotoBadgeImage
-        }
-    }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         imageView.image = nil
-        livePhotoBadgeImageView.image = nil
+        faceId.text = ""
+        faces.text = ""
     }
 }

@@ -7,12 +7,23 @@ Contains the sample's app delegate.
 
 import UIKit
 import Photos
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
     
     var window: UIWindow?
-    
+
+    lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "MLKitPoc")
+        container.loadPersistentStores{ (store, error) in
+            if let error = error {
+                fatalError("Error while loading database: \(error.localizedDescription)")
+            }
+        }
+        return container
+    }()
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         guard let splitViewController = self.window?.rootViewController as? UISplitViewController else { return true }
         #if os(iOS)
