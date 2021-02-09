@@ -58,10 +58,8 @@ class FaceDetectionRunner {
     private func cleanupOldAnalysisData() {
         let context = DBHelper.getViewContext()
         context.performAndWait {
-            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Asset")
-            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
             do{
-                try context.execute(deleteRequest)
+                try context.execute(Asset.batchDeleteRequest)
                 try context.save()
                 Logger.log(tag: FaceDetectionRunner.TAG, message: "Cleaning database")
             } catch {

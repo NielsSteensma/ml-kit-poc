@@ -8,7 +8,6 @@
 
 import UIKit
 import Photos
-import CoreData
 
 class AssetGridCellConfigurator {
     private lazy var imageManager = PHImageManager()
@@ -35,16 +34,12 @@ class AssetGridCellConfigurator {
     private func setMLKitResults(asset: PHAsset, cell: GridViewCell){
         let context = DBHelper.getViewContext()
         context.perform {
-            let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Asset")
-            fetchRequest.predicate = NSPredicate(format: "localId == %@", asset.localIdentifier)
             do {
+                let fetchRequest = Asset.byLocalAssetIdFetchRequest(localAssetId: asset.localIdentifier)
                 let foundAsset = try context.fetch(fetchRequest)
-                print("SIZE: \(foundAsset.count)")
-                if let asset = foundAsset.first,
-                   let faceId = asset.value(forKey: "faceId") as? Int,
-                   let faces = asset.value(forKey: "amountOfFaces") as? Int {
-                    cell.faceId.text = faceId != 0 ? String(faceId) : ""
-                    cell.faces.text = faces != 0 ? String(faces) : ""
+                if let asset = foundAsset.first {
+                    cell.faceId.text = asset.faceId != 0 ? String(asset.faceId) : ""
+                    cell.faces.text = asset.amountOfFaces != 0 ? String(asset.amountOfFaces) : ""
                 }
                 cell.layoutIfNeeded()
             } catch {

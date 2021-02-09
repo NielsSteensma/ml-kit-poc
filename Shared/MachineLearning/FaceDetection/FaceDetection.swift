@@ -62,12 +62,12 @@ class FaceDetection {
         let context = DBHelper.getViewContext()
 
         context.performAndWait {
-            let asset = NSEntityDescription.insertNewObject(forEntityName: "Asset", into: context)
-            asset.setValue(mlKitImage.asset.localIdentifier, forKey: "localId")
-            asset.setValue(results.amountOfFaces, forKey: "amountOfFaces")
+            let asset = Asset(context: context)
+            asset.localId = mlKitImage.asset.localIdentifier
+            asset.amountOfFaces = Int16(results.amountOfFaces)
             if !results.trackingIds.isEmpty {
                 // For now just insert the first found faceId
-                asset.setValue(results.trackingIds[0], forKey: "faceId")
+                asset.faceId = Int16(results.trackingIds[0])
             }
 
             do {
