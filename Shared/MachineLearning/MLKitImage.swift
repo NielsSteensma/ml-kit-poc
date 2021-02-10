@@ -15,4 +15,5 @@ import Photos
 struct MLKitImage {
     let uiImage: UIImage
     let asset: PHAsset
+    let assetCollection: AssetCollection
 }

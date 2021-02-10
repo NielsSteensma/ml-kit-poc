@@ -6,7 +6,6 @@
 //  Copyright © 2021 Apple. All rights reserved.
 //
 
-import Foundation
 import CoreData
 
 /**
@@ -21,7 +20,7 @@ final class Asset: NSManagedObject {
     static var batchDeleteRequest: NSBatchDeleteRequest {
         return NSBatchDeleteRequest(fetchRequest: Asset.fetchRequest())
     }
-    
+
     static func byLocalAssetIdFetchRequest(localAssetId: String) -> NSFetchRequest<Asset> {
         let fetchRequest = Asset.fetchRequest() as! NSFetchRequest<Asset>
         fetchRequest.predicate = NSPredicate(format: "localId == %@", localAssetId)

@@ -4,8 +4,32 @@
         <attribute name="amountOfFaces" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="faceId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="localId" optional="YES" attributeType="String"/>
+        <relationship name="assetAssetCollection" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AssetAssetCollection" inverseName="asset" inverseEntity="AssetAssetCollection"/>
+        <relationship name="assetFaces" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AssetFaces" inverseName="asset" inverseEntity="AssetFaces"/>
+    </entity>
+    <entity name="AssetAssetCollection" representedClassName=".AssetAssetCollection" syncable="YES">
+        <relationship name="asset" maxCount="1" deletionRule="Cascade" destinationEntity="Asset" inverseName="assetAssetCollection" inverseEntity="Asset"/>
+        <relationship name="assetCollection" maxCount="1" deletionRule="Cascade" destinationEntity="AssetCollection" inverseName="assetAssetCollection" inverseEntity="AssetCollection"/>
+    </entity>
+    <entity name="AssetCollection" representedClassName=".AssetCollection" syncable="YES">
+        <attribute name="localId" optional="YES" attributeType="String"/>
+        <relationship name="assetAssetCollection" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AssetAssetCollection" inverseName="assetCollection" inverseEntity="AssetAssetCollection"/>
+        <relationship name="assetFaces" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AssetFaces" inverseName="assetCollection" inverseEntity="AssetFaces"/>
+    </entity>
+    <entity name="AssetFaces" representedClassName=".AssetFaces" syncable="YES">
+        <relationship name="asset" maxCount="1" deletionRule="Cascade" destinationEntity="Asset" inverseName="assetFaces" inverseEntity="Asset"/>
+        <relationship name="assetCollection" maxCount="1" deletionRule="Cascade" destinationEntity="AssetCollection" inverseName="assetFaces" inverseEntity="AssetCollection"/>
+        <relationship name="detectedFace" maxCount="1" deletionRule="Cascade" destinationEntity="DetectedFace" inverseName="assetFaces" inverseEntity="DetectedFace"/>
+    </entity>
+    <entity name="DetectedFace" representedClassName=".DetectedFace" syncable="YES">
+        <attribute name="trackingId" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="assetFaces" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AssetFaces" inverseName="detectedFace" inverseEntity="AssetFaces"/>
     </entity>
     <elements>
-        <element name="Asset" positionX="-36" positionY="9" width="128" height="88"/>
+        <element name="Asset" positionX="-475.7890625" positionY="27.33203125" width="128" height="118"/>
+        <element name="AssetAssetCollection" positionX="-17.84765625" positionY="256.98046875" width="128" height="73"/>
+        <element name="AssetCollection" positionX="380.375" positionY="-43.9140625" width="128" height="88"/>
+        <element name="AssetFaces" positionX="-215.640625" positionY="-38.84375" width="128" height="88"/>
+        <element name="DetectedFace" positionX="-54.52734375" positionY="136.265625" width="128" height="73"/>
     </elements>
 </model>

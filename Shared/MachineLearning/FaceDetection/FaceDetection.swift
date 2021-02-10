@@ -48,7 +48,7 @@ class FaceDetection {
             }
 
             let results = sSelf.processResults(faces: faces)
-            sSelf.saveInDB(mlKitImage: image, results: results)
+            sSelf.storeResults(mlKitImage: image, results: results)
             dispatchGroup.leave()
         }
     }
@@ -58,23 +58,68 @@ class FaceDetection {
                        trackingIds: faces?.map{ $0.trackingID } ?? [])
     }
 
-    private func saveInDB(mlKitImage: MLKitImage, results: Result) {
+    private func storeResults(mlKitImage: MLKitImage, results: Result) {
         let context = DBHelper.getViewContext()
+        let asset = saveAssetInDB(mlKitImage: mlKitImage,
+                                  results: results,
+                                  context: context)
+        saveDetectedFaceTrackingIds(asset: asset,
+                                    mlKitImage: mlKitImage,
+                                    trackingIds: results.trackingIds,
+                                    context: context)
+    }
 
+    private func saveAssetInDB(mlKitImage: MLKitImage, results: Result, context: NSManagedObjectContext) -> Asset {
+        var createdAsset: Asset?
         context.performAndWait {
-            let asset = Asset(context: context)
-            asset.localId = mlKitImage.asset.localIdentifier
-            asset.amountOfFaces = Int16(results.amountOfFaces)
-            if !results.trackingIds.isEmpty {
-                // For now just insert the first found faceId
-                asset.faceId = Int16(results.trackingIds[0])
-            }
-
             do {
+                // Save asset
+                let asset = Asset(context: context)
+                asset.localId = mlKitImage.asset.localIdentifier
+                asset.amountOfFaces = Int16(results.amountOfFaces)
+                if !results.trackingIds.isEmpty {
+                    // For now just insert the first found faceId
+                    asset.faceId = Int16(results.trackingIds[0])
+                }
+
+                // Associate asset with asset collection
+                let assetAssetCollection = AssetAssetCollection(context: context)
+                assetAssetCollection.asset = asset
+                assetAssetCollection.assetCollection = mlKitImage.assetCollection
                 try context.save()
-                Logger.log(tag: FaceDetection.TAG, message: "Inserting analysis data")
+                createdAsset = asset
             } catch {
-                Logger.log(tag: FaceDetection.TAG, message: "Error while inserting analysis data")
+                fatalError(error.localizedDescription)
+            }
+        }
+        return createdAsset!
+    }
+
+    private func saveDetectedFaceTrackingIds(asset: Asset, mlKitImage: MLKitImage, trackingIds: [Int], context: NSManagedObjectContext) {
+        context.performAndWait {
+            do {
+                // Create each detected face if it doesn't yet exist
+                for trackingId in trackingIds {
+                    let detectedFaces = try context.fetch(DetectedFace.bytrackingIdFetchRequest(trackingId: Int16(trackingId)))
+                    if detectedFaces.isEmpty {
+                        let detectedFace = DetectedFace(context: context)
+                        detectedFace.trackingId = Int16(trackingId)
+                        try context.save()
+                    }
+                }
+
+                // Associate each detected face with the asset and collection
+                for trackingId in trackingIds {
+                    let detectedFaces = try context.fetch(DetectedFace.bytrackingIdFetchRequest(trackingId: Int16(trackingId)))
+
+                    let assetFaces = AssetFaces(context: context)
+                    assetFaces.asset = asset
+                    assetFaces.assetCollection = mlKitImage.assetCollection
+                    assetFaces.detectedFace = detectedFaces.first!
+                }
+                try context.save()
+            } catch {
+                fatalError(error.localizedDescription)
             }
         }
     }

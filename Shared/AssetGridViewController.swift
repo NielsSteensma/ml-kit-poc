@@ -9,6 +9,7 @@ import UIKit
 import Photos
 import PhotosUI
 import CoreData
+import Foundation
 
 private extension UICollectionView {
     func indexPathsForElements(in rect: CGRect) -> [IndexPath] {
@@ -19,7 +20,9 @@ private extension UICollectionView {
 
 class AssetGridViewController: UICollectionViewController {
     private let cellConfigurator = AssetGridCellConfigurator()
-    
+
+    var sections: [Int16] = []
+    var assetFaces: [Int: [AssetFaces]] = [:]
     var fetchResult: PHFetchResult<PHAsset>!
     var assetCollection: PHAssetCollection!
     var availableWidth: CGFloat = 0
@@ -71,7 +74,20 @@ class AssetGridViewController: UICollectionViewController {
             collectionViewFlowLayout.itemSize = CGSize(width: itemLength, height: itemLength)
         }
     }
-    
+
+    private func printDetectedFaces() {
+        let context = DBHelper.getViewContext()
+        context.performAndWait {
+            do{
+                let assetFaces = try context.fetch(AssetFaces.fetchRequest())
+                let foundFaces = assetFaces.count
+                print("Found faces: \(foundFaces)")
+            } catch{
+                print(error.localizedDescription)
+            }
+        }
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -105,11 +121,47 @@ class AssetGridViewController: UICollectionViewController {
     // MARK: UICollectionView
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fetchResult.count
+        if sections.isEmpty {
+            return 0
+        }
+
+        // TODO: Move to a viewmodel
+        var numberOfItems: Int = 0
+        let context = DBHelper.getViewContext()
+        context.performAndWait {
+            do {
+                let trackingId = sections[section]
+                let detectedFace = try context.fetch(DetectedFace.bytrackingIdFetchRequest(trackingId: trackingId))
+                let fetchedAssetFaces = try context.fetch(AssetFaces.byDetectedFaceFetchRequest(detectedFace: detectedFace.first!))
+                numberOfItems = fetchedAssetFaces.count
+                assetFaces[section] = fetchedAssetFaces
+            } catch {
+                fatalError(error.localizedDescription)
+            }
+        }
+        return numberOfItems
+    }
+
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        // TODO: Move to a viewmodel
+        let context = DBHelper.getViewContext()
+        context.performAndWait {
+            do {
+                let assetCollection = try context.fetch(AssetCollection.byLocalIdFetchRequest(localId: self.assetCollection.localIdentifier))
+                let assetFaces = try context.fetch(AssetFaces.byAssetCollectionFetchRequest(assetCollection: assetCollection.first!))
+                sections = Array(Set(assetFaces.map({$0.detectedFace.trackingId})))
+                print("Found faces: \(sections)")
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        return sections.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let asset = fetchResult.object(at: indexPath.item)
+        let localAssetIdentifier = assetFaces[indexPath.section]![indexPath.item].asset.localId
+        let fetchedAssets = PHAsset.fetchAssets(withLocalIdentifiers: [localAssetIdentifier], options: nil)
+        let asset = fetchedAssets.firstObject!
         // Dequeue a GridViewCell.
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GridViewCell", for: indexPath) as? GridViewCell
             else { fatalError("Unexpected cell in collection view") }
@@ -117,6 +169,11 @@ class AssetGridViewController: UICollectionViewController {
         cellConfigurator.configure(for: cell, with: asset, thumbnailSize: self.thumbnailSize)
         return cell
     }
+
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "SectionHeader", for: indexPath)
+    }
+
     
     // MARK: UIScrollView
     
