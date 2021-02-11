@@ -23,6 +23,7 @@ class FaceDetectionRunner {
     func run(for collection: PHAssetCollection, completion: @escaping CompletionHandler) {
         Logger.log(tag: FaceDetectionRunner.TAG, message: "Start for collection \(collection.localizedTitle ?? "")")
         cleanupOldAnalysisData()
+        let assetCollection = createAssetCollectionIfNotExists(localId: collection.localIdentifier)
 
         let assets = PHAsset.fetchAssets(in: collection, options: nil)
 
@@ -32,7 +33,9 @@ class FaceDetectionRunner {
             serialQueue.async {
                 let dispatchGroup = DispatchGroup()
                 dispatchGroup.enter()
-                self.analyse(asset: assets[i], dispatchGroup: dispatchGroup)
+                self.analyse(asset: assets[i],
+                             assetCollection: assetCollection,
+                             dispatchGroup: dispatchGroup)
 
                 // If we processed last asset we want to invoke the completionhandler
                 if i == assets.count - 1 {
@@ -42,17 +45,40 @@ class FaceDetectionRunner {
         }
     }
 
-    private func analyse(asset: PHAsset, dispatchGroup: DispatchGroup) {
+    private func analyse(asset: PHAsset, assetCollection: AssetCollection, dispatchGroup: DispatchGroup) {
         PHImageManager.default().requestImageForFaceDetection(for: asset) { [weak self] image in
             guard let self = self, let image = image else {
                 return
             }
 
-            let mlKitImage = MLKitImage(uiImage: image, asset: asset)
+            let mlKitImage = MLKitImage(uiImage: image, asset: asset, assetCollection: assetCollection)
             self.faceDetection.detect(for: mlKitImage, dispatchGroup: dispatchGroup)
         }
 
         dispatchGroup.wait()
+    }
+
+    private func createAssetCollectionIfNotExists(localId: String) -> AssetCollection {
+        var assetCollection: AssetCollection?
+        let context = DBHelper.getViewContext()
+        context.performAndWait {
+            do {
+                let foundCollections = try context.fetchOne(AssetCollection.byLocalIdFetchRequest(localId: localId))
+                if foundCollections == nil {
+                    assetCollection = AssetCollection(context: context)
+                    assetCollection!.localId = localId
+                }
+                else {
+                    assetCollection = foundCollections
+                }
+                try context.save()
+            }
+            catch {
+                fatalError(error.localizedDescription)
+            }
+        }
+
+        return assetCollection!
     }
 
     private func cleanupOldAnalysisData() {
@@ -60,11 +86,16 @@ class FaceDetectionRunner {
         context.performAndWait {
             do{
                 try context.execute(Asset.batchDeleteRequest)
+                try context.execute(DetectedFace.batchDeleteRequest)
+                try context.execute(AssetCollection.batchDeleteRequest)
+                try context.execute(AssetAssetCollection.batchDeleteRequest)
+                try context.execute(AssetFaces.batchDeleteRequest)
                 try context.save()
                 Logger.log(tag: FaceDetectionRunner.TAG, message: "Cleaning database")
             } catch {
-                print(error)
+                fatalError(error.localizedDescription)
             }
         }
     }
+
 }

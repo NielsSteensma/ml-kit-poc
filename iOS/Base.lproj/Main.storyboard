@@ -88,7 +88,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="e2s-0C-bH8">
-                                            <rect key="frame" x="323" y="12" width="44" height="20.5"/>
+                                            <rect key="frame" x="315" y="12" width="44" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -123,6 +123,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="6fW-3P-Xnz">
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
@@ -172,23 +173,23 @@
             </objects>
             <point key="canvasLocation" x="1509" y="128"/>
         </scene>
-        <!--Asset Grid View Controller-->
+        <!--Face Clustering View Controller-->
         <scene sceneID="AG0-cu-bpp">
             <objects>
-                <collectionViewController id="mEd-c0-4A5" customClass="AssetGridViewController" customModule="MLKitPoc" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="mEd-c0-4A5" customClass="FaceClusteringViewController" customModule="MLKitPoc" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="bIC-Zl-0JL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="0.0" sectionInsetReference="safeArea" id="DJA-Lb-Xgj">
                             <size key="itemSize" width="80" height="80"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="headerReferenceSize" width="50" height="50"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GridViewCell" id="cUE-R9-xrz" customClass="GridViewCell" customModule="MLKitPoc" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FaceClusteringViewCell" id="cUE-R9-xrz" customClass="FaceClusteringViewCell" customModule="MLKitPoc" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="50" width="80" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
@@ -200,12 +201,6 @@
                                                 <constraint firstAttribute="width" constant="80" id="3dN-kD-RCw"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="bottomRight" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9vR-M6-9pq" userLabel="faceId">
-                                            <rect key="frame" x="12" y="68" width="56" height="0.0"/>
-                                            <fontDescription key="fontDescription" type="system" weight="black" pointSize="17"/>
-                                            <color key="textColor" systemColor="systemRedColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="bottomRight" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HFO-PX-cDU" userLabel="faces">
                                             <rect key="frame" x="4" y="4" width="72" height="0.0"/>
                                             <fontDescription key="fontDescription" type="system" weight="black" pointSize="17"/>
@@ -215,27 +210,43 @@
                                     </subviews>
                                 </view>
                                 <constraints>
-                                    <constraint firstItem="9vR-M6-9pq" firstAttribute="leading" secondItem="cUE-R9-xrz" secondAttribute="leadingMargin" constant="4" id="2hR-bM-TSN"/>
                                     <constraint firstAttribute="bottom" secondItem="2Hr-HS-oNO" secondAttribute="bottom" id="5vU-gV-LKM"/>
                                     <constraint firstItem="2Hr-HS-oNO" firstAttribute="leading" secondItem="cUE-R9-xrz" secondAttribute="leading" id="Jms-ht-lIG"/>
                                     <constraint firstItem="HFO-PX-cDU" firstAttribute="top" relation="greaterThanOrEqual" secondItem="cUE-R9-xrz" secondAttribute="top" constant="4" id="KrP-I1-ciw"/>
                                     <constraint firstItem="HFO-PX-cDU" firstAttribute="leading" secondItem="cUE-R9-xrz" secondAttribute="leading" constant="4" id="Q6h-ux-fWV"/>
-                                    <constraint firstAttribute="trailingMargin" secondItem="9vR-M6-9pq" secondAttribute="trailing" constant="4" id="Rv0-rr-Pci"/>
-                                    <constraint firstAttribute="bottomMargin" secondItem="9vR-M6-9pq" secondAttribute="bottom" constant="4" id="Xkh-Ww-STJ"/>
-                                    <constraint firstItem="9vR-M6-9pq" firstAttribute="top" relation="greaterThanOrEqual" secondItem="cUE-R9-xrz" secondAttribute="topMargin" id="Y4J-hC-HfF"/>
                                     <constraint firstItem="2Hr-HS-oNO" firstAttribute="top" secondItem="cUE-R9-xrz" secondAttribute="top" id="nHN-gk-Mkq"/>
                                     <constraint firstAttribute="trailing" secondItem="HFO-PX-cDU" secondAttribute="trailing" constant="4" id="t6X-GX-Dgw"/>
                                     <constraint firstItem="HFO-PX-cDU" firstAttribute="top" secondItem="cUE-R9-xrz" secondAttribute="top" constant="4" id="uIK-5I-eeU"/>
                                     <constraint firstAttribute="trailing" secondItem="2Hr-HS-oNO" secondAttribute="trailing" id="wIQ-ec-TXk"/>
                                 </constraints>
                                 <connections>
-                                    <outlet property="faceId" destination="9vR-M6-9pq" id="3N2-nb-3Oe"/>
                                     <outlet property="faces" destination="HFO-PX-cDU" id="bIs-Q0-pTN"/>
                                     <outlet property="imageView" destination="2Hr-HS-oNO" id="65f-Fw-8hK"/>
                                     <segue destination="Q4y-Ku-OQN" kind="showDetail" id="OXs-Hc-Pjw"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="FaceHeader" id="LHt-ZT-SXS" userLabel="FaceHeaderSection" customClass="FaceHeader" customModule="MLKitPoc" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjF-Wy-XfJ" userLabel="faceIdLabel">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="cjF-Wy-XfJ" secondAttribute="trailing" id="Gv4-lu-6Sm"/>
+                                <constraint firstItem="cjF-Wy-XfJ" firstAttribute="top" secondItem="LHt-ZT-SXS" secondAttribute="top" id="euu-fx-3gj"/>
+                                <constraint firstItem="cjF-Wy-XfJ" firstAttribute="leading" secondItem="LHt-ZT-SXS" secondAttribute="leading" id="nMC-7e-Shc"/>
+                                <constraint firstAttribute="bottom" secondItem="cjF-Wy-XfJ" secondAttribute="bottom" id="opB-XS-KC4"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="faceIdLabel" destination="cjF-Wy-XfJ" id="1mq-Cu-be8"/>
+                            </connections>
+                        </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="mEd-c0-4A5" id="Eb8-bN-PvQ"/>
                             <outlet property="delegate" destination="mEd-c0-4A5" id="ATN-SF-2Ph"/>
@@ -252,7 +263,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Tll-UG-LXB"/>
+        <segue reference="isy-3O-iv3"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemRedColor">

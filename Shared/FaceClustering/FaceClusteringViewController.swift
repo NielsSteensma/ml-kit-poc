@@ -1,27 +1,16 @@
-/*
-See LICENSE folder for this sample’s licensing information.
-
-Abstract:
-Implements the view controller for browsing photos in a grid layout.
-*/
-
 import UIKit
 import Photos
 import PhotosUI
 import CoreData
+import Foundation
 
-private extension UICollectionView {
-    func indexPathsForElements(in rect: CGRect) -> [IndexPath] {
-        let allLayoutAttributes = collectionViewLayout.layoutAttributesForElements(in: rect)!
-        return allLayoutAttributes.map { $0.indexPath }
-    }
-}
-
-class AssetGridViewController: UICollectionViewController {
-    private let cellConfigurator = AssetGridCellConfigurator()
-    
+/**
+ Shows a grid of all PHAssets in a PHAssetCollection where each section in the grid represents a found face.
+ */
+class FaceClusteringViewController: UICollectionViewController {
+    private let cellConfigurator = FaceClusteringViewCellConfigurator()
+    var viewModel: FaceClusteringViewModel!
     var fetchResult: PHFetchResult<PHAsset>!
-    var assetCollection: PHAssetCollection!
     var availableWidth: CGFloat = 0
     
     @IBOutlet var addButtonItem: UIBarButtonItem!
@@ -35,6 +24,8 @@ class AssetGridViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let nib = UINib(nibName: "FaceHeader", bundle:nil)
+        self.collectionView.register(nib, forCellWithReuseIdentifier: "FaceHeader")
         
         resetCachedAssets()
         PHPhotoLibrary.shared().register(self)
@@ -48,9 +39,10 @@ class AssetGridViewController: UICollectionViewController {
             fetchResult = PHAsset.fetchAssets(with: allPhotosOptions)
         }
 
-        FaceDetectionRunner.instance.run(for: assetCollection) { [weak self] in
+        FaceDetectionRunner.instance.run(for: viewModel.phAssetCollection) { [weak self] in
             guard let self = self else { return }
             DispatchQueue.main.async {
+                self.viewModel.updateData()
                 self.collectionView.reloadData()
             }
         }
@@ -71,7 +63,7 @@ class AssetGridViewController: UICollectionViewController {
             collectionViewFlowLayout.itemSize = CGSize(width: itemLength, height: itemLength)
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -79,13 +71,6 @@ class AssetGridViewController: UICollectionViewController {
         let scale = UIScreen.main.scale
         let cellSize = collectionViewFlowLayout.itemSize
         thumbnailSize = CGSize(width: cellSize.width * scale, height: cellSize.height * scale)
-        
-        // Add a button to the navigation bar if the asset collection supports adding content.
-        if assetCollection == nil || assetCollection.canPerform(.addContent) {
-            navigationItem.rightBarButtonItem = addButtonItem
-        } else {
-            navigationItem.rightBarButtonItem = nil
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -99,24 +84,44 @@ class AssetGridViewController: UICollectionViewController {
         
         let indexPath = collectionView.indexPath(for: collectionViewCell)!
         destination.asset = fetchResult.object(at: indexPath.item)
-        destination.assetCollection = assetCollection
+        destination.assetCollection = viewModel.phAssetCollection
     }
     
     // MARK: UICollectionView
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fetchResult.count
+        if viewModel.detectedFaceIds.isEmpty {
+            return 0
+        }
+        let faceId = viewModel.detectedFaceIds[section]
+        return viewModel.assetFaces[faceId]!.count
+    }
+
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return viewModel.detectedFaceIds.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let asset = fetchResult.object(at: indexPath.item)
+        let faceId = viewModel.detectedFaceIds[indexPath.section]
+        let asset = viewModel.fetchAsset(for: faceId, index: indexPath.item)
         // Dequeue a GridViewCell.
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GridViewCell", for: indexPath) as? GridViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FaceClusteringViewCell.identifier, for: indexPath) as? FaceClusteringViewCell
             else { fatalError("Unexpected cell in collection view") }
 
         cellConfigurator.configure(for: cell, with: asset, thumbnailSize: self.thumbnailSize)
         return cell
     }
+
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard let faceHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "FaceHeader", for: indexPath) as? FaceHeader else {
+            fatalError("Unable to find faceheader")
+        }
+
+        let faceId = viewModel.detectedFaceIds[indexPath.section]
+        faceHeader.setData(faceId: faceId)
+        return faceHeader
+    }
+
     
     // MARK: UIScrollView
     
@@ -189,7 +194,7 @@ class AssetGridViewController: UICollectionViewController {
 }
 
 // MARK: PHPhotoLibraryChangeObserver
-extension AssetGridViewController: PHPhotoLibraryChangeObserver {
+extension FaceClusteringViewController: PHPhotoLibraryChangeObserver {
     func photoLibraryDidChange(_ changeInstance: PHChange) {
         
         guard let changes = changeInstance.changeDetails(for: fetchResult)
@@ -231,3 +236,9 @@ extension AssetGridViewController: PHPhotoLibraryChangeObserver {
     }
 }
 
+private extension UICollectionView {
+    func indexPathsForElements(in rect: CGRect) -> [IndexPath] {
+        let allLayoutAttributes = collectionViewLayout.layoutAttributesForElements(in: rect)!
+        return allLayoutAttributes.map { $0.indexPath }
+    }
+}

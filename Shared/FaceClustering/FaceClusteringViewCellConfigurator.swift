@@ -1,5 +1,5 @@
 //
-//  AssetGridCellConfigurator.swift
+//  FaceClusteringCellConfigurator.swift
 //  MLKitPoc
 //
 //  Created by Niels Steensma on 07/02/2021.
@@ -9,7 +9,7 @@
 import UIKit
 import Photos
 
-class FaceClusteringCellConfigurator {
+class FaceClusteringViewCellConfigurator {
     private lazy var imageManager = PHImageManager()
 
     /**
@@ -36,9 +36,8 @@ class FaceClusteringCellConfigurator {
         context.perform {
             do {
                 let fetchRequest = Asset.byLocalAssetIdFetchRequest(localAssetId: asset.localIdentifier)
-                let foundAsset = try context.fetch(fetchRequest)
-                if let asset = foundAsset.first {
-                    cell.faceId.text = asset.faceId != 0 ? String(asset.faceId) : ""
+                let foundAsset = try context.fetchOne(fetchRequest)
+                if let asset = foundAsset {
                     cell.faces.text = asset.amountOfFaces != 0 ? String(asset.amountOfFaces) : ""
                 }
                 cell.layoutIfNeeded()

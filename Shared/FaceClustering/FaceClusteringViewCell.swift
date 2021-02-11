@@ -1,16 +1,12 @@
-/*
-See LICENSE folder for this sample’s licensing information.
-
-Abstract:
-Implements the collection view cell for displaying an asset in the grid view.
-*/
-
 import UIKit
 
-class GridViewCell: UICollectionViewCell {
+/**
+ Shows the thumbnail of a PHAsset and a label with the amount of found faces and first found faceId
+ */
+class FaceClusteringViewCell: UICollectionViewCell {
+    static let identifier = "FaceClusteringViewCell"
 
     @IBOutlet var imageView: UIImageView!
-    @IBOutlet var faceId: UILabel!
     @IBOutlet var faces: UILabel!
     
     var representedAssetIdentifier: String!
@@ -24,7 +20,6 @@ class GridViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         imageView.image = nil
-        faceId.text = ""
         faces.text = ""
     }
 }
