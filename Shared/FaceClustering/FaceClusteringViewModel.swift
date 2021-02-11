@@ -36,11 +36,11 @@ class FaceClusteringViewModel {
         context.performAndWait {
             do {
                 let assetCollection =
-                    try context.fetch(AssetCollection.byLocalIdFetchRequest(localId: phAssetCollection.localIdentifier))
-                let assetFaces = try context.fetch(AssetFaces.byAssetCollectionFetchRequest(assetCollection: assetCollection.first!))
+                    try context.fetchOne(AssetCollection.byLocalIdFetchRequest(localId: phAssetCollection.localIdentifier))!
+                let assetFaces = assetCollection.assetFaces
                 detectedFaceIds = Array(Set(assetFaces.map({$0.detectedFace.trackingId})))
             } catch {
-                print(error.localizedDescription)
+                fatalError(error.localizedDescription)
             }
         }
     }
@@ -50,9 +50,8 @@ class FaceClusteringViewModel {
         context.performAndWait {
             for detectedFaceId in detectedFaceIds {
                 do {
-                    let detectedFace = try context.fetch(DetectedFace.bytrackingIdFetchRequest(trackingId: detectedFaceId))
-                    let fetchedAssetFaces = try context.fetch(AssetFaces.byDetectedFaceFetchRequest(detectedFace: detectedFace.first!))
-                    assetFaces[detectedFaceId] = fetchedAssetFaces
+                    let detectedFace = try context.fetchOne(DetectedFace.bytrackingIdFetchRequest(trackingId: detectedFaceId))!
+                    assetFaces[detectedFaceId] = Array(detectedFace.assetFaces)
                 } catch {
                     fatalError(error.localizedDescription)
                 }

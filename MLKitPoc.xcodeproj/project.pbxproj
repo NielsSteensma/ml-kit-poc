@@ -25,6 +25,8 @@
 		125FC3A3A24D47E1E506B6E1 /* Pods_MLKitPoc_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98A5108A2450C884364940EB /* Pods_MLKitPoc_iOS.framework */; };
 		8201CE4BDF8D42C8983E7A77 /* Pods_MLKitPoc_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1992356C7E0DDBF7E7483FD /* Pods_MLKitPoc_tvOS.framework */; };
 		B828CB5025D288BC002C71FE /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = B828CB4F25D288BC002C71FE /* Asset.swift */; };
+		B8449E4A25D56ED0003BD990 /* NsManagedObjectContextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8449E4925D56ED0003BD990 /* NsManagedObjectContextExtensions.swift */; };
+		B8449E4B25D56ED0003BD990 /* NsManagedObjectContextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8449E4925D56ED0003BD990 /* NsManagedObjectContextExtensions.swift */; };
 		B8626F5D25D48B0A00A43A10 /* FaceHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8626F5C25D48B0A00A43A10 /* FaceHeader.swift */; };
 		B8626F5E25D48B0A00A43A10 /* FaceHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8626F5C25D48B0A00A43A10 /* FaceHeader.swift */; };
 		B8643DBF25D334B80081797A /* FacesAssetCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8643DBE25D334B80081797A /* FacesAssetCollection.swift */; };
@@ -72,6 +74,7 @@
 		A91B5A4E5CDD074302DAF2F9 /* Pods-MLKitPoc iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLKitPoc iOS.release.xcconfig"; path = "Target Support Files/Pods-MLKitPoc iOS/Pods-MLKitPoc iOS.release.xcconfig"; sourceTree = "<group>"; };
 		B10FC121852C268008CBC0B2 /* Pods-PhotoBrowse iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoBrowse iOS.release.xcconfig"; path = "Target Support Files/Pods-PhotoBrowse iOS/Pods-PhotoBrowse iOS.release.xcconfig"; sourceTree = "<group>"; };
 		B828CB4F25D288BC002C71FE /* Asset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
+		B8449E4925D56ED0003BD990 /* NsManagedObjectContextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NsManagedObjectContextExtensions.swift; sourceTree = "<group>"; };
 		B8626F5C25D48B0A00A43A10 /* FaceHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceHeader.swift; sourceTree = "<group>"; };
 		B8643DBE25D334B80081797A /* FacesAssetCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacesAssetCollection.swift; sourceTree = "<group>"; };
 		B884DE3925D00ACD005253A5 /* FaceClusteringViewCellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceClusteringViewCellConfigurator.swift; sourceTree = "<group>"; };
@@ -227,6 +230,7 @@
 				B8F4AAD825CD53F400B6F99C /* Logger.swift */,
 				B884DE3E25D12606005253A5 /* PHImageManagerExtensions.swift */,
 				B884DE4325D127A2005253A5 /* DBHelper.swift */,
+				B8449E4925D56ED0003BD990 /* NsManagedObjectContextExtensions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -504,6 +508,7 @@
 				B8ACA65225D2E2700029F3C6 /* AssetCollection.swift in Sources */,
 				B884DE3A25D00ACD005253A5 /* FaceClusteringViewCellConfigurator.swift in Sources */,
 				B8626F5D25D48B0A00A43A10 /* FaceHeader.swift in Sources */,
+				B8449E4A25D56ED0003BD990 /* NsManagedObjectContextExtensions.swift in Sources */,
 				B8F4AAD925CD53F400B6F99C /* Logger.swift in Sources */,
 				B884DE4425D127A2005253A5 /* DBHelper.swift in Sources */,
 				B8643DBF25D334B80081797A /* FacesAssetCollection.swift in Sources */,
@@ -521,6 +526,7 @@
 				B884DE3B25D00ACD005253A5 /* FaceClusteringViewCellConfigurator.swift in Sources */,
 				118FE13E1CEF0A0B004F2F51 /* MasterViewController.swift in Sources */,
 				B8FAE09925D5243500511831 /* FaceClusteringViewModel.swift in Sources */,
+				B8449E4B25D56ED0003BD990 /* NsManagedObjectContextExtensions.swift in Sources */,
 				B884DE4025D12606005253A5 /* PHImageManagerExtensions.swift in Sources */,
 				118FE13F1CEF0A0B004F2F51 /* FaceClusteringViewController.swift in Sources */,
 				B884DE4525D127A2005253A5 /* DBHelper.swift in Sources */,

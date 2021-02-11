@@ -14,6 +14,7 @@ import CoreData
 @objc(DetectedFace)
 final class DetectedFace: NSManagedObject {
     @NSManaged var trackingId: Int16
+    @NSManaged var assetFaces: Set<AssetFaces>
 
     static var batchDeleteRequest: NSBatchDeleteRequest {
         return NSBatchDeleteRequest(fetchRequest: DetectedFace.fetchRequest())

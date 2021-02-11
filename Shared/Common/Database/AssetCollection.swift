@@ -13,6 +13,7 @@ import CoreData
  */
 class AssetCollection: NSManagedObject {
     @NSManaged var localId: String
+    @NSManaged var assetFaces: Set<AssetFaces>
 
     static var batchDeleteRequest: NSBatchDeleteRequest {
         return NSBatchDeleteRequest(fetchRequest: AssetCollection.fetchRequest())
