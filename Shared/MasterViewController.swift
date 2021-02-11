@@ -88,7 +88,7 @@ class MasterViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        guard let destination = (segue.destination as? UINavigationController)?.topViewController as? AssetGridViewController
+        guard let destination = (segue.destination as? UINavigationController)?.topViewController as? FaceClusteringViewController
             else { fatalError("Unexpected view controller for segue.") }
         guard let cell = sender as? UITableViewCell else { fatalError("Unexpected sender for segue.") }
         
@@ -114,7 +114,7 @@ class MasterViewController: UITableViewController {
             guard let assetCollection = collection as? PHAssetCollection
                 else { fatalError("Expected an asset collection.") }
             destination.fetchResult = PHAsset.fetchAssets(in: assetCollection, options: nil)
-            destination.assetCollection = assetCollection
+            destination.viewModel = FaceClusteringViewModel(phAssetCollection: assetCollection)
         }
     }
     

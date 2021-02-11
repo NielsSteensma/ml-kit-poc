@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		118FE1161CEF0525004F2F51 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FE1151CEF0525004F2F51 /* AppDelegate.swift */; };
 		118FE1181CEF0525004F2F51 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FE1171CEF0525004F2F51 /* MasterViewController.swift */; };
-		118FE11A1CEF0525004F2F51 /* AssetGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FE1191CEF0525004F2F51 /* AssetGridViewController.swift */; };
+		118FE11A1CEF0525004F2F51 /* FaceClusteringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FE1191CEF0525004F2F51 /* FaceClusteringViewController.swift */; };
 		118FE11D1CEF0525004F2F51 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 118FE11B1CEF0525004F2F51 /* Main.storyboard */; };
 		118FE11F1CEF0525004F2F51 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 118FE11E1CEF0525004F2F51 /* Assets.xcassets */; };
 		118FE1221CEF0525004F2F51 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 118FE1201CEF0525004F2F51 /* LaunchScreen.storyboard */; };
@@ -17,7 +17,7 @@
 		118FE1371CEF07DE004F2F51 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 118FE1361CEF07DE004F2F51 /* Assets.xcassets */; };
 		118FE13D1CEF08A6004F2F51 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FE1151CEF0525004F2F51 /* AppDelegate.swift */; };
 		118FE13E1CEF0A0B004F2F51 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FE1171CEF0525004F2F51 /* MasterViewController.swift */; };
-		118FE13F1CEF0A0B004F2F51 /* AssetGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FE1191CEF0525004F2F51 /* AssetGridViewController.swift */; };
+		118FE13F1CEF0A0B004F2F51 /* FaceClusteringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FE1191CEF0525004F2F51 /* FaceClusteringViewController.swift */; };
 		11E1BB9B1CF1371A0057E18F /* GridViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E1BB9A1CF1371A0057E18F /* GridViewCell.swift */; };
 		11E1BB9C1CF1371A0057E18F /* GridViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E1BB9A1CF1371A0057E18F /* GridViewCell.swift */; };
 		11E1BB9E1CF137450057E18F /* AssetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E1BB9D1CF137450057E18F /* AssetViewController.swift */; };
@@ -25,6 +25,8 @@
 		125FC3A3A24D47E1E506B6E1 /* Pods_MLKitPoc_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98A5108A2450C884364940EB /* Pods_MLKitPoc_iOS.framework */; };
 		8201CE4BDF8D42C8983E7A77 /* Pods_MLKitPoc_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1992356C7E0DDBF7E7483FD /* Pods_MLKitPoc_tvOS.framework */; };
 		B828CB5025D288BC002C71FE /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = B828CB4F25D288BC002C71FE /* Asset.swift */; };
+		B8626F5D25D48B0A00A43A10 /* FaceHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8626F5C25D48B0A00A43A10 /* FaceHeader.swift */; };
+		B8626F5E25D48B0A00A43A10 /* FaceHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8626F5C25D48B0A00A43A10 /* FaceHeader.swift */; };
 		B8643DBF25D334B80081797A /* FacesAssetCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8643DBE25D334B80081797A /* FacesAssetCollection.swift */; };
 		B884DE3A25D00ACD005253A5 /* AssetGridCellConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B884DE3925D00ACD005253A5 /* AssetGridCellConfigurator.swift */; };
 		B884DE3B25D00ACD005253A5 /* AssetGridCellConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B884DE3925D00ACD005253A5 /* AssetGridCellConfigurator.swift */; };
@@ -41,6 +43,8 @@
 		B8F4AAD925CD53F400B6F99C /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F4AAD825CD53F400B6F99C /* Logger.swift */; };
 		B8F4AAE125CD6E6900B6F99C /* MLKitPoc.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B8F4AADF25CD6E6900B6F99C /* MLKitPoc.xcdatamodeld */; };
 		B8F4AAFF25CDA2B300B6F99C /* FaceDetectionRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F4AAFE25CDA2B300B6F99C /* FaceDetectionRunner.swift */; };
+		B8FAE09825D5243500511831 /* FaceClusteringViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FAE09725D5243500511831 /* FaceClusteringViewModel.swift */; };
+		B8FAE09925D5243500511831 /* FaceClusteringViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FAE09725D5243500511831 /* FaceClusteringViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,7 +52,7 @@
 		118FE1121CEF0525004F2F51 /* MLKitPoc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLKitPoc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		118FE1151CEF0525004F2F51 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		118FE1171CEF0525004F2F51 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MasterViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		118FE1191CEF0525004F2F51 /* AssetGridViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetGridViewController.swift; sourceTree = "<group>"; };
+		118FE1191CEF0525004F2F51 /* FaceClusteringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceClusteringViewController.swift; sourceTree = "<group>"; };
 		118FE11C1CEF0525004F2F51 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		118FE11E1CEF0525004F2F51 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		118FE1211CEF0525004F2F51 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -68,6 +72,7 @@
 		A91B5A4E5CDD074302DAF2F9 /* Pods-MLKitPoc iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLKitPoc iOS.release.xcconfig"; path = "Target Support Files/Pods-MLKitPoc iOS/Pods-MLKitPoc iOS.release.xcconfig"; sourceTree = "<group>"; };
 		B10FC121852C268008CBC0B2 /* Pods-PhotoBrowse iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoBrowse iOS.release.xcconfig"; path = "Target Support Files/Pods-PhotoBrowse iOS/Pods-PhotoBrowse iOS.release.xcconfig"; sourceTree = "<group>"; };
 		B828CB4F25D288BC002C71FE /* Asset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
+		B8626F5C25D48B0A00A43A10 /* FaceHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceHeader.swift; sourceTree = "<group>"; };
 		B8643DBE25D334B80081797A /* FacesAssetCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacesAssetCollection.swift; sourceTree = "<group>"; };
 		B884DE3925D00ACD005253A5 /* AssetGridCellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetGridCellConfigurator.swift; sourceTree = "<group>"; };
 		B884DE3E25D12606005253A5 /* PHImageManagerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHImageManagerExtensions.swift; sourceTree = "<group>"; };
@@ -81,6 +86,7 @@
 		B8F4AAD825CD53F400B6F99C /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		B8F4AAE025CD6E6900B6F99C /* MLKitPoc.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MLKitPoc.xcdatamodel; sourceTree = "<group>"; };
 		B8F4AAFE25CDA2B300B6F99C /* FaceDetectionRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetectionRunner.swift; sourceTree = "<group>"; };
+		B8FAE09725D5243500511831 /* FaceClusteringViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceClusteringViewModel.swift; sourceTree = "<group>"; };
 		B9985AA18D9FB8365E43B0AB /* Pods-MLKitPoc iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLKitPoc iOS.debug.xcconfig"; path = "Target Support Files/Pods-MLKitPoc iOS/Pods-MLKitPoc iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		C8F473CAF7C3A576C3D346BE /* Pods-PhotoBrowse iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoBrowse iOS.debug.xcconfig"; path = "Target Support Files/Pods-PhotoBrowse iOS/Pods-PhotoBrowse iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		D1992356C7E0DDBF7E7483FD /* Pods_MLKitPoc_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MLKitPoc_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -159,11 +165,13 @@
 				B8F4AAD725CD53E800B6F99C /* Helpers */,
 				B8F4AACB25CC506B00B6F99C /* MachineLearning */,
 				118FE1151CEF0525004F2F51 /* AppDelegate.swift */,
-				118FE1191CEF0525004F2F51 /* AssetGridViewController.swift */,
+				118FE1191CEF0525004F2F51 /* FaceClusteringViewController.swift */,
 				11E1BB9D1CF137450057E18F /* AssetViewController.swift */,
 				11E1BB9A1CF1371A0057E18F /* GridViewCell.swift */,
 				118FE1171CEF0525004F2F51 /* MasterViewController.swift */,
 				B884DE3925D00ACD005253A5 /* AssetGridCellConfigurator.swift */,
+				B8626F5C25D48B0A00A43A10 /* FaceHeader.swift */,
+				B8FAE09725D5243500511831 /* FaceClusteringViewModel.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -457,8 +465,9 @@
 			files = (
 				11E1BB9E1CF137450057E18F /* AssetViewController.swift in Sources */,
 				11E1BB9B1CF1371A0057E18F /* GridViewCell.swift in Sources */,
-				118FE11A1CEF0525004F2F51 /* AssetGridViewController.swift in Sources */,
+				118FE11A1CEF0525004F2F51 /* FaceClusteringViewController.swift in Sources */,
 				118FE1181CEF0525004F2F51 /* MasterViewController.swift in Sources */,
+				B8FAE09825D5243500511831 /* FaceClusteringViewModel.swift in Sources */,
 				B8F4AACE25CC508700B6F99C /* FaceDetection.swift in Sources */,
 				B8ACA66B25D321850029F3C6 /* AssetFaces.swift in Sources */,
 				B8F4AAE125CD6E6900B6F99C /* MLKitPoc.xcdatamodeld in Sources */,
@@ -470,6 +479,7 @@
 				B8F4AAFF25CDA2B300B6F99C /* FaceDetectionRunner.swift in Sources */,
 				B8ACA65225D2E2700029F3C6 /* AssetCollection.swift in Sources */,
 				B884DE3A25D00ACD005253A5 /* AssetGridCellConfigurator.swift in Sources */,
+				B8626F5D25D48B0A00A43A10 /* FaceHeader.swift in Sources */,
 				B8F4AAD925CD53F400B6F99C /* Logger.swift in Sources */,
 				B884DE4425D127A2005253A5 /* DBHelper.swift in Sources */,
 				B8643DBF25D334B80081797A /* FacesAssetCollection.swift in Sources */,
@@ -486,9 +496,11 @@
 				118FE13D1CEF08A6004F2F51 /* AppDelegate.swift in Sources */,
 				B884DE3B25D00ACD005253A5 /* AssetGridCellConfigurator.swift in Sources */,
 				118FE13E1CEF0A0B004F2F51 /* MasterViewController.swift in Sources */,
+				B8FAE09925D5243500511831 /* FaceClusteringViewModel.swift in Sources */,
 				B884DE4025D12606005253A5 /* PHImageManagerExtensions.swift in Sources */,
-				118FE13F1CEF0A0B004F2F51 /* AssetGridViewController.swift in Sources */,
+				118FE13F1CEF0A0B004F2F51 /* FaceClusteringViewController.swift in Sources */,
 				B884DE4525D127A2005253A5 /* DBHelper.swift in Sources */,
+				B8626F5E25D48B0A00A43A10 /* FaceHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

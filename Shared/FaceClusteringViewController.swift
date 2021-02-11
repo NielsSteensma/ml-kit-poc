@@ -1,30 +1,16 @@
-/*
-See LICENSE folder for this sample’s licensing information.
-
-Abstract:
-Implements the view controller for browsing photos in a grid layout.
-*/
-
 import UIKit
 import Photos
 import PhotosUI
 import CoreData
 import Foundation
 
-private extension UICollectionView {
-    func indexPathsForElements(in rect: CGRect) -> [IndexPath] {
-        let allLayoutAttributes = collectionViewLayout.layoutAttributesForElements(in: rect)!
-        return allLayoutAttributes.map { $0.indexPath }
-    }
-}
-
-class AssetGridViewController: UICollectionViewController {
+/**
+ Shows a grid of all PHAssets in a PHAssetCollection where each section in the grid represents a found face.
+ */
+class FaceClusteringViewController: UICollectionViewController {
     private let cellConfigurator = AssetGridCellConfigurator()
-
-    var sections: [Int16] = []
-    var assetFaces: [Int: [AssetFaces]] = [:]
+    var viewModel: FaceClusteringViewModel!
     var fetchResult: PHFetchResult<PHAsset>!
-    var assetCollection: PHAssetCollection!
     var availableWidth: CGFloat = 0
     
     @IBOutlet var addButtonItem: UIBarButtonItem!
@@ -38,6 +24,8 @@ class AssetGridViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let nib = UINib(nibName: "FaceHeader", bundle:nil)
+        self.collectionView.register(nib, forCellWithReuseIdentifier: "FaceHeader")
         
         resetCachedAssets()
         PHPhotoLibrary.shared().register(self)
@@ -51,9 +39,10 @@ class AssetGridViewController: UICollectionViewController {
             fetchResult = PHAsset.fetchAssets(with: allPhotosOptions)
         }
 
-        FaceDetectionRunner.instance.run(for: assetCollection) { [weak self] in
+        FaceDetectionRunner.instance.run(for: viewModel.phAssetCollection) { [weak self] in
             guard let self = self else { return }
             DispatchQueue.main.async {
+                self.viewModel.updateData()
                 self.collectionView.reloadData()
             }
         }
@@ -95,13 +84,6 @@ class AssetGridViewController: UICollectionViewController {
         let scale = UIScreen.main.scale
         let cellSize = collectionViewFlowLayout.itemSize
         thumbnailSize = CGSize(width: cellSize.width * scale, height: cellSize.height * scale)
-        
-        // Add a button to the navigation bar if the asset collection supports adding content.
-        if assetCollection == nil || assetCollection.canPerform(.addContent) {
-            navigationItem.rightBarButtonItem = addButtonItem
-        } else {
-            navigationItem.rightBarButtonItem = nil
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -115,53 +97,24 @@ class AssetGridViewController: UICollectionViewController {
         
         let indexPath = collectionView.indexPath(for: collectionViewCell)!
         destination.asset = fetchResult.object(at: indexPath.item)
-        destination.assetCollection = assetCollection
+        destination.assetCollection = viewModel.phAssetCollection
     }
     
     // MARK: UICollectionView
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if sections.isEmpty {
+        if viewModel.detectedFaceIds.isEmpty {
             return 0
         }
-
-        // TODO: Move to a viewmodel
-        var numberOfItems: Int = 0
-        let context = DBHelper.getViewContext()
-        context.performAndWait {
-            do {
-                let trackingId = sections[section]
-                let detectedFace = try context.fetch(DetectedFace.bytrackingIdFetchRequest(trackingId: trackingId))
-                let fetchedAssetFaces = try context.fetch(AssetFaces.byDetectedFaceFetchRequest(detectedFace: detectedFace.first!))
-                numberOfItems = fetchedAssetFaces.count
-                assetFaces[section] = fetchedAssetFaces
-            } catch {
-                fatalError(error.localizedDescription)
-            }
-        }
-        return numberOfItems
+        return viewModel.assetFaces[Int16(section)]!.count
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // TODO: Move to a viewmodel
-        let context = DBHelper.getViewContext()
-        context.performAndWait {
-            do {
-                let assetCollection = try context.fetch(AssetCollection.byLocalIdFetchRequest(localId: self.assetCollection.localIdentifier))
-                let assetFaces = try context.fetch(AssetFaces.byAssetCollectionFetchRequest(assetCollection: assetCollection.first!))
-                sections = Array(Set(assetFaces.map({$0.detectedFace.trackingId})))
-                print("Found faces: \(sections)")
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-        return sections.count
+        return viewModel.detectedFaceIds.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let localAssetIdentifier = assetFaces[indexPath.section]![indexPath.item].asset.localId
-        let fetchedAssets = PHAsset.fetchAssets(withLocalIdentifiers: [localAssetIdentifier], options: nil)
-        let asset = fetchedAssets.firstObject!
+        let asset = viewModel.fetchAsset(detectedFaceId: indexPath.section, index: indexPath.item)
         // Dequeue a GridViewCell.
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GridViewCell", for: indexPath) as? GridViewCell
             else { fatalError("Unexpected cell in collection view") }
@@ -171,7 +124,12 @@ class AssetGridViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "SectionHeader", for: indexPath)
+        guard let faceHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "FaceHeader", for: indexPath) as? FaceHeader else {
+            fatalError("Unable to find faceheader")
+        }
+
+        faceHeader.faceIdLabel.text = String("Face: \(viewModel.detectedFaceIds[indexPath.item])")
+        return faceHeader
     }
 
     
@@ -246,7 +204,7 @@ class AssetGridViewController: UICollectionViewController {
 }
 
 // MARK: PHPhotoLibraryChangeObserver
-extension AssetGridViewController: PHPhotoLibraryChangeObserver {
+extension FaceClusteringViewController: PHPhotoLibraryChangeObserver {
     func photoLibraryDidChange(_ changeInstance: PHChange) {
         
         guard let changes = changeInstance.changeDetails(for: fetchResult)
@@ -288,3 +246,9 @@ extension AssetGridViewController: PHPhotoLibraryChangeObserver {
     }
 }
 
+private extension UICollectionView {
+    func indexPathsForElements(in rect: CGRect) -> [IndexPath] {
+        let allLayoutAttributes = collectionViewLayout.layoutAttributesForElements(in: rect)!
+        return allLayoutAttributes.map { $0.indexPath }
+    }
+}

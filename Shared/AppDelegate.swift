@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController,
                              onto primaryViewController: UIViewController) -> Bool {
         guard let secondaryAsNavController = secondaryViewController as? UINavigationController else { return false }
-        guard let topAsDetailController = secondaryAsNavController.topViewController as? AssetGridViewController else { return false }
+        guard let topAsDetailController = secondaryAsNavController.topViewController as? FaceClusteringViewController else { return false }
         if topAsDetailController.fetchResult == nil {
             // Return true to indicate that the app has handled the collapse by doing nothing and will discard the secondary controller.
             return true
