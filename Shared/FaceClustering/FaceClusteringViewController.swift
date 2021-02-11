@@ -117,7 +117,8 @@ class FaceClusteringViewController: UICollectionViewController {
             fatalError("Unable to find faceheader")
         }
 
-        faceHeader.faceIdLabel.text = String("Face: \(viewModel.detectedFaceIds[indexPath.item])")
+        let faceId = viewModel.detectedFaceIds[indexPath.section]
+        faceHeader.setData(faceId: faceId)
         return faceHeader
     }
 

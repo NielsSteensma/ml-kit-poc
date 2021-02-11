@@ -10,4 +10,13 @@ import UIKit
 
 class FaceHeader: UICollectionReusableView {
     @IBOutlet var faceIdLabel: UILabel!
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        faceIdLabel.text = ""
+    }
+
+    func setData(faceId: Int16){
+        faceIdLabel.text = String("Face: \(faceId)")
+    }
 }
