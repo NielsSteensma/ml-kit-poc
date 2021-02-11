@@ -9,19 +9,19 @@
 import Photos
 
 /**
- Viewmodel associated with the face clustering grid.
+ View model associated with the face clustering grid.
  */
 class FaceClusteringViewModel {
     private(set) var detectedFaceIds: [Int16] = []
-    var assetFaces: [Int16: [AssetFaces]] = [:]
+    private(set) var assetFaces: [Int16: [AssetFaces]] = [:]
     var phAssetCollection: PHAssetCollection
 
     init(phAssetCollection: PHAssetCollection) {
         self.phAssetCollection = phAssetCollection
     }
 
-    func fetchAsset(detectedFaceId: Int, index: Int) -> PHAsset {
-        let localAssetIdentifier = assetFaces[Int16(detectedFaceId)]![index].asset.localId
+    func fetchAsset(for faceId: Int16, index: Int) -> PHAsset {
+        let localAssetIdentifier = assetFaces[faceId]![index].asset.localId
         let fetchedAssets = PHAsset.fetchAssets(withLocalIdentifiers: [localAssetIdentifier], options: nil)
         return fetchedAssets.firstObject!
     }

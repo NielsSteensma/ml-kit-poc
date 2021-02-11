@@ -106,7 +106,8 @@ class FaceClusteringViewController: UICollectionViewController {
         if viewModel.detectedFaceIds.isEmpty {
             return 0
         }
-        return viewModel.assetFaces[Int16(section)]!.count
+        let faceId = viewModel.detectedFaceIds[section]
+        return viewModel.assetFaces[faceId]!.count
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -114,7 +115,8 @@ class FaceClusteringViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let asset = viewModel.fetchAsset(detectedFaceId: indexPath.section, index: indexPath.item)
+        let faceId = viewModel.detectedFaceIds[indexPath.section]
+        let asset = viewModel.fetchAsset(for: faceId, index: indexPath.item)
         // Dequeue a GridViewCell.
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FaceClusteringViewCell.identifier, for: indexPath) as? FaceClusteringViewCell
             else { fatalError("Unexpected cell in collection view") }
