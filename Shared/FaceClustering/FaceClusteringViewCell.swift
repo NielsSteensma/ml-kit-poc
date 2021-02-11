@@ -1,7 +1,7 @@
 import UIKit
 
 /**
- Shows the thumbnail of a PHAsset and a label withf the amount of found faces and first found faceId
+ Shows the thumbnail of a PHAsset and a label with the amount of found faces and first found faceId
  */
 class FaceClusteringViewCell: UICollectionViewCell {
     static let identifier = "FaceClusteringViewCell"

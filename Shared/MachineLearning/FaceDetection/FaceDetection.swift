@@ -110,12 +110,12 @@ class FaceDetection {
 
                 // Associate each detected face with the asset and collection
                 for trackingId in trackingIds {
-                    let detectedFaces = try context.fetch(DetectedFace.bytrackingIdFetchRequest(trackingId: Int16(trackingId)))
+                    let detectedFace = try context.fetchOne(DetectedFace.bytrackingIdFetchRequest(trackingId: Int16(trackingId)))
 
                     let assetFaces = AssetFaces(context: context)
                     assetFaces.asset = asset
                     assetFaces.assetCollection = mlKitImage.assetCollection
-                    assetFaces.detectedFace = detectedFaces.first!
+                    assetFaces.detectedFace = detectedFace!
                 }
                 try context.save()
             } catch {

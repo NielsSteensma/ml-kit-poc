@@ -9,7 +9,7 @@
 import Photos
 
 /**
- View model associated with the face clustering grid.
+ Viewmodel associated with the face clustering grid.
  */
 class FaceClusteringViewModel {
     private(set) var detectedFaceIds: [Int16] = []

@@ -22,7 +22,7 @@ final class DetectedFace: NSManagedObject {
 
     static func bytrackingIdFetchRequest(trackingId: Int16) -> NSFetchRequest<DetectedFace> {
         let fetchRequest = DetectedFace.fetchRequest() as! NSFetchRequest<DetectedFace>
-        fetchRequest.predicate = NSPredicate(format: "trackingId == %d", Int16(trackingId))
+        fetchRequest.predicate = NSPredicate(format: "trackingId == %d", trackingId)
         return fetchRequest
     }
 }

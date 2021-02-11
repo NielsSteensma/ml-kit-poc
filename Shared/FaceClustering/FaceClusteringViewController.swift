@@ -64,19 +64,6 @@ class FaceClusteringViewController: UICollectionViewController {
         }
     }
 
-    private func printDetectedFaces() {
-        let context = DBHelper.getViewContext()
-        context.performAndWait {
-            do{
-                let assetFaces = try context.fetch(AssetFaces.fetchRequest())
-                let foundFaces = assetFaces.count
-                print("Found faces: \(foundFaces)")
-            } catch{
-                print(error.localizedDescription)
-            }
-        }
-    }
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         

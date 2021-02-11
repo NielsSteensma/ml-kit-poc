@@ -63,18 +63,18 @@ class FaceDetectionRunner {
         let context = DBHelper.getViewContext()
         context.performAndWait {
             do {
-                let foundCollections = try context.fetch(AssetCollection.byLocalIdFetchRequest(localId: localId))
-                if foundCollections.isEmpty {
+                let foundCollections = try context.fetchOne(AssetCollection.byLocalIdFetchRequest(localId: localId))
+                if foundCollections == nil {
                     assetCollection = AssetCollection(context: context)
                     assetCollection!.localId = localId
                 }
                 else {
-                    assetCollection = foundCollections.first!
+                    assetCollection = foundCollections
                 }
                 try context.save()
             }
             catch {
-                print(error)
+                fatalError(error.localizedDescription)
             }
         }
 
@@ -93,7 +93,7 @@ class FaceDetectionRunner {
                 try context.save()
                 Logger.log(tag: FaceDetectionRunner.TAG, message: "Cleaning database")
             } catch {
-                print(error)
+                fatalError(error.localizedDescription)
             }
         }
     }
