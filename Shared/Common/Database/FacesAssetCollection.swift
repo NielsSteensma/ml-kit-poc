@@ -9,7 +9,7 @@
 import CoreData
 
 /**
- Resembles a face nside an asset collection.
+ Resembles a face inside an asset collection.
  */
 class FacesAssetCollection: NSManagedObject {
     @NSManaged var detectedFace: DetectedFace

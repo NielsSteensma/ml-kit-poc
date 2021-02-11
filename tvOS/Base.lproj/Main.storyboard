@@ -19,7 +19,7 @@
                             <inset key="sectionInset" minX="30" minY="0.0" maxX="30" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GridViewCell" id="P1W-st-1B8" customClass="GridViewCell" customModule="PhotoBrowse" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GridViewCell" id="P1W-st-1B8" customClass="ThumbnailViewCell" customModule="PhotoBrowse" customModuleProvider="target">
                                 <rect key="frame" x="30" y="0.0" width="280" height="280"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">

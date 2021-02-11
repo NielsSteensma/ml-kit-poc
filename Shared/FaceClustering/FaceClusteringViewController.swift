@@ -8,7 +8,7 @@ import Foundation
  Shows a grid of all PHAssets in a PHAssetCollection where each section in the grid represents a found face.
  */
 class FaceClusteringViewController: UICollectionViewController {
-    private let cellConfigurator = AssetGridCellConfigurator()
+    private let cellConfigurator = FaceClusteringViewCellConfigurator()
     var viewModel: FaceClusteringViewModel!
     var fetchResult: PHFetchResult<PHAsset>!
     var availableWidth: CGFloat = 0
@@ -116,7 +116,7 @@ class FaceClusteringViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let asset = viewModel.fetchAsset(detectedFaceId: indexPath.section, index: indexPath.item)
         // Dequeue a GridViewCell.
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GridViewCell", for: indexPath) as? GridViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FaceClusteringViewCell.identifier, for: indexPath) as? FaceClusteringViewCell
             else { fatalError("Unexpected cell in collection view") }
 
         cellConfigurator.configure(for: cell, with: asset, thumbnailSize: self.thumbnailSize)

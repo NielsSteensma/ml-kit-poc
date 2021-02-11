@@ -1,5 +1,5 @@
 //
-//  AssetGridCellConfigurator.swift
+//  FaceClusteringCellConfigurator.swift
 //  MLKitPoc
 //
 //  Created by Niels Steensma on 07/02/2021.
@@ -9,7 +9,7 @@
 import UIKit
 import Photos
 
-class FaceClusteringCellConfigurator {
+class FaceClusteringViewCellConfigurator {
     private lazy var imageManager = PHImageManager()
 
     /**
