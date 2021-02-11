@@ -7,7 +7,6 @@ class FaceClusteringViewCell: UICollectionViewCell {
     static let identifier = "FaceClusteringViewCell"
 
     @IBOutlet var imageView: UIImageView!
-    @IBOutlet var faceId: UILabel!
     @IBOutlet var faces: UILabel!
     
     var representedAssetIdentifier: String!
@@ -21,7 +20,6 @@ class FaceClusteringViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         imageView.image = nil
-        faceId.text = ""
         faces.text = ""
     }
 }

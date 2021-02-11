@@ -38,7 +38,6 @@ class FaceClusteringViewCellConfigurator {
                 let fetchRequest = Asset.byLocalAssetIdFetchRequest(localAssetId: asset.localIdentifier)
                 let foundAsset = try context.fetchOne(fetchRequest)
                 if let asset = foundAsset {
-                    cell.faceId.text = asset.faceId != 0 ? String(asset.faceId) : ""
                     cell.faces.text = asset.amountOfFaces != 0 ? String(asset.amountOfFaces) : ""
                 }
                 cell.layoutIfNeeded()
