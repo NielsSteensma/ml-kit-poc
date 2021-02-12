@@ -159,7 +159,7 @@
         <!--Photos-->
         <scene sceneID="he0-o0-ZkF">
             <objects>
-                <tableViewController clearsSelectionOnViewWillAppear="NO" id="rjh-Es-5bR" customClass="MasterViewController" customModule="PhotoBrowse" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="rjh-Es-5bR" customClass="CollectionsViewController" customModule="PhotoBrowse" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" id="Ktr-pj-pIF">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

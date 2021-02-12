@@ -9,7 +9,7 @@ import UIKit
 import Photos
 import CoreML
 
-class MasterViewController: UITableViewController {
+class CollectionsViewController: UITableViewController {
     
     // MARK: Types for managing sections, cell, and segue identifiers
     enum Section: Int {
@@ -161,7 +161,7 @@ class MasterViewController: UITableViewController {
 
 // MARK: PHPhotoLibraryChangeObserver
 
-extension MasterViewController: PHPhotoLibraryChangeObserver {
+extension CollectionsViewController: PHPhotoLibraryChangeObserver {
     /// - Tag: RespondToChanges
     func photoLibraryDidChange(_ changeInstance: PHChange) {
         
