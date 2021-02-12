@@ -7,6 +7,7 @@
 //
 
 import Photos
+import UIKit
 
 /**
  Viewmodel associated with the face clustering grid.
@@ -20,6 +21,15 @@ class FaceClusteringViewModel {
         self.phAssetCollection = phAssetCollection
     }
 
+    func fetchFaceImage(trackingId: Int16) -> UIImage {
+        let context = DBHelper.getViewContext()
+        do {
+            let detectedFace = try context.fetchOne(DetectedFace.bytrackingIdFetchRequest(trackingId: trackingId))
+            return UIImage(data: detectedFace!.image)!
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
     func fetchAsset(for faceId: Int16, index: Int) -> PHAsset {
         let localAssetIdentifier = assetFaces[faceId]![index].asset.localId
         let fetchedAssets = PHAsset.fetchAssets(withLocalIdentifiers: [localAssetIdentifier], options: nil)

@@ -27,6 +27,8 @@
 		B828CB5025D288BC002C71FE /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = B828CB4F25D288BC002C71FE /* Asset.swift */; };
 		B8449E4A25D56ED0003BD990 /* NsManagedObjectContextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8449E4925D56ED0003BD990 /* NsManagedObjectContextExtensions.swift */; };
 		B8449E4B25D56ED0003BD990 /* NsManagedObjectContextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8449E4925D56ED0003BD990 /* NsManagedObjectContextExtensions.swift */; };
+		B845CBEB25D6CE3B00958678 /* FaceHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = B845CBEA25D6CE3B00958678 /* FaceHeader.xib */; };
+		B845CBEC25D6CE3B00958678 /* FaceHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = B845CBEA25D6CE3B00958678 /* FaceHeader.xib */; };
 		B8626F5D25D48B0A00A43A10 /* FaceHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8626F5C25D48B0A00A43A10 /* FaceHeader.swift */; };
 		B8626F5E25D48B0A00A43A10 /* FaceHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8626F5C25D48B0A00A43A10 /* FaceHeader.swift */; };
 		B8643DBF25D334B80081797A /* FacesAssetCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8643DBE25D334B80081797A /* FacesAssetCollection.swift */; };
@@ -75,6 +77,7 @@
 		B10FC121852C268008CBC0B2 /* Pods-PhotoBrowse iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoBrowse iOS.release.xcconfig"; path = "Target Support Files/Pods-PhotoBrowse iOS/Pods-PhotoBrowse iOS.release.xcconfig"; sourceTree = "<group>"; };
 		B828CB4F25D288BC002C71FE /* Asset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
 		B8449E4925D56ED0003BD990 /* NsManagedObjectContextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NsManagedObjectContextExtensions.swift; sourceTree = "<group>"; };
+		B845CBEA25D6CE3B00958678 /* FaceHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FaceHeader.xib; sourceTree = "<group>"; };
 		B8626F5C25D48B0A00A43A10 /* FaceHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceHeader.swift; sourceTree = "<group>"; };
 		B8643DBE25D334B80081797A /* FacesAssetCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacesAssetCollection.swift; sourceTree = "<group>"; };
 		B884DE3925D00ACD005253A5 /* FaceClusteringViewCellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceClusteringViewCellConfigurator.swift; sourceTree = "<group>"; };
@@ -252,6 +255,7 @@
 		B8FAE0A025D5402A00511831 /* FaceClustering */ = {
 			isa = PBXGroup;
 			children = (
+				B845CBEA25D6CE3B00958678 /* FaceHeader.xib */,
 				B8626F5C25D48B0A00A43A10 /* FaceHeader.swift */,
 				B884DE3925D00ACD005253A5 /* FaceClusteringViewCellConfigurator.swift */,
 				11E1BB9A1CF1371A0057E18F /* FaceClusteringViewCell.swift */,
@@ -377,6 +381,7 @@
 				118FE1221CEF0525004F2F51 /* LaunchScreen.storyboard in Resources */,
 				118FE11F1CEF0525004F2F51 /* Assets.xcassets in Resources */,
 				118FE11D1CEF0525004F2F51 /* Main.storyboard in Resources */,
+				B845CBEB25D6CE3B00958678 /* FaceHeader.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,6 +390,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				118FE1371CEF07DE004F2F51 /* Assets.xcassets in Resources */,
+				B845CBEC25D6CE3B00958678 /* FaceHeader.xib in Resources */,
 				118FE1351CEF07DE004F2F51 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

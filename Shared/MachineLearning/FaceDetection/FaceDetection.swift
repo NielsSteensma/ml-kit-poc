@@ -20,7 +20,7 @@ class FaceDetection {
 
     struct Result {
         let amountOfFaces: Int
-        let trackingIds: [Int]
+        let faces: [Face]
     }
 
     init() {
@@ -47,15 +47,14 @@ class FaceDetection {
                 return
             }
 
-            let results = sSelf.processResults(faces: faces)
+            let results = sSelf.processResults(image: image.uiImage, faces: faces)
             sSelf.storeResults(mlKitImage: image, results: results)
             dispatchGroup.leave()
         }
     }
 
-    private func processResults(faces: [Face]?) -> Result {
-        return Result(amountOfFaces: faces?.count ?? 0,
-                       trackingIds: faces?.map{ $0.trackingID } ?? [])
+    private func processResults(image: UIImage, faces: [Face]?) -> Result {
+        return Result(amountOfFaces: faces?.count ?? 0, faces: faces!)
     }
 
     private func storeResults(mlKitImage: MLKitImage, results: Result) {
@@ -65,7 +64,7 @@ class FaceDetection {
                                   context: context)
         saveDetectedFaceTrackingIds(asset: asset,
                                     mlKitImage: mlKitImage,
-                                    trackingIds: results.trackingIds,
+                                    result: results,
                                     context: context)
     }
 
@@ -77,10 +76,6 @@ class FaceDetection {
                 let asset = Asset(context: context)
                 asset.localId = mlKitImage.asset.localIdentifier
                 asset.amountOfFaces = Int16(results.amountOfFaces)
-                if !results.trackingIds.isEmpty {
-                    // For now just insert the first found faceId
-                    asset.faceId = Int16(results.trackingIds[0])
-                }
 
                 // Associate asset with asset collection
                 let assetAssetCollection = AssetAssetCollection(context: context)
@@ -95,22 +90,28 @@ class FaceDetection {
         return createdAsset!
     }
 
-    private func saveDetectedFaceTrackingIds(asset: Asset, mlKitImage: MLKitImage, trackingIds: [Int], context: NSManagedObjectContext) {
+    private func saveDetectedFaceTrackingIds(asset: Asset, mlKitImage: MLKitImage, result: Result, context: NSManagedObjectContext) {
         context.performAndWait {
             do {
                 // Create each detected face if it doesn't yet exist
-                for trackingId in trackingIds {
-                    let detectedFaces = try context.fetch(DetectedFace.bytrackingIdFetchRequest(trackingId: Int16(trackingId)))
+                for face in result.faces {
+                    let detectedFaces = try context.fetch(DetectedFace.bytrackingIdFetchRequest(trackingId: Int16(face.trackingID)))
                     if detectedFaces.isEmpty {
                         let detectedFace = DetectedFace(context: context)
-                        detectedFace.trackingId = Int16(trackingId)
+                        detectedFace.trackingId = Int16(face.trackingID)
+
+                        // Crop the face from the image
+                        let croppedFace = UIImage(cgImage: mlKitImage.uiImage.cgImage!.cropping(to: face.frame)!)
+
+                        // Save the cropped face in db ( not great )
+                        detectedFace.image = croppedFace.jpegData(compressionQuality: 1.0)!
                         try context.save()
                     }
                 }
 
                 // Associate each detected face with the asset and collection
-                for trackingId in trackingIds {
-                    let detectedFace = try context.fetchOne(DetectedFace.bytrackingIdFetchRequest(trackingId: Int16(trackingId)))
+                for face in result.faces {
+                    let detectedFace = try context.fetchOne(DetectedFace.bytrackingIdFetchRequest(trackingId: Int16(face.trackingID)))
 
                     let assetFaces = AssetFaces(context: context)
                     assetFaces.asset = asset
