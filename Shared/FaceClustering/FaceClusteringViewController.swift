@@ -85,7 +85,8 @@ class FaceClusteringViewController: UICollectionViewController {
         guard let collectionViewCell = sender as? UICollectionViewCell else { fatalError("Unexpected sender for segue") }
         
         let indexPath = collectionView.indexPath(for: collectionViewCell)!
-        destination.asset = fetchResult.object(at: indexPath.item)
+        let detectedFace = viewModel.detectedFaceIds[indexPath.section]
+        destination.asset = viewModel.fetchAsset(for: detectedFace, index: indexPath.item)
         destination.assetCollection = viewModel.phAssetCollection
     }
     
