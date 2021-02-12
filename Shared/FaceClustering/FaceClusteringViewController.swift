@@ -24,8 +24,9 @@ class FaceClusteringViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let nib = UINib(nibName: "FaceHeader", bundle:nil)
-        self.collectionView.register(nib, forCellWithReuseIdentifier: "FaceHeader")
+        collectionView.register(UINib(nibName: FaceHeader.identifier, bundle: Bundle.main),
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: FaceHeader.identifier)
         
         resetCachedAssets()
         PHPhotoLibrary.shared().register(self)
@@ -62,6 +63,7 @@ class FaceClusteringViewController: UICollectionViewController {
             let itemLength = (availableWidth - columnCount - 1) / columnCount
             collectionViewFlowLayout.itemSize = CGSize(width: itemLength, height: itemLength)
         }
+        collectionViewFlowLayout.headerReferenceSize = CGSize(width: self.availableWidth, height: 120)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -118,7 +120,8 @@ class FaceClusteringViewController: UICollectionViewController {
         }
 
         let faceId = viewModel.detectedFaceIds[indexPath.section]
-        faceHeader.setData(faceId: faceId)
+        let image = viewModel.fetchFaceImage(trackingId: faceId)
+        faceHeader.setData(faceId: faceId, image: image)
         return faceHeader
     }
 

@@ -55,7 +55,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Arm-wq-HPj">
-                                            <rect key="frame" x="15" y="12" width="33" height="20.5"/>
+                                            <rect key="frame" x="16" y="12" width="33" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="highlightedColor"/>
@@ -82,13 +82,13 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="K6l-cR-29h">
-                                            <rect key="frame" x="16" y="12" width="33" height="20.5"/>
+                                            <rect key="frame" x="15" y="12" width="33" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="e2s-0C-bH8">
-                                            <rect key="frame" x="315" y="12" width="44" height="20.5"/>
+                                            <rect key="frame" x="323" y="12" width="44" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -226,26 +226,9 @@
                                 </connections>
                             </collectionViewCell>
                         </cells>
-                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="FaceHeader" id="LHt-ZT-SXS" userLabel="FaceHeaderSection" customClass="FaceHeader" customModule="MLKitPoc" customModuleProvider="target">
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="-" id="k0K-tL-sYT">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                             <autoresizingMask key="autoresizingMask"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjF-Wy-XfJ" userLabel="faceIdLabel">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                            <constraints>
-                                <constraint firstAttribute="trailing" secondItem="cjF-Wy-XfJ" secondAttribute="trailing" id="Gv4-lu-6Sm"/>
-                                <constraint firstItem="cjF-Wy-XfJ" firstAttribute="top" secondItem="LHt-ZT-SXS" secondAttribute="top" id="euu-fx-3gj"/>
-                                <constraint firstItem="cjF-Wy-XfJ" firstAttribute="leading" secondItem="LHt-ZT-SXS" secondAttribute="leading" id="nMC-7e-Shc"/>
-                                <constraint firstAttribute="bottom" secondItem="cjF-Wy-XfJ" secondAttribute="bottom" id="opB-XS-KC4"/>
-                            </constraints>
-                            <connections>
-                                <outlet property="faceIdLabel" destination="cjF-Wy-XfJ" id="1mq-Cu-be8"/>
-                            </connections>
                         </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="mEd-c0-4A5" id="Eb8-bN-PvQ"/>
@@ -259,7 +242,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sNK-oD-waS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="708" y="128"/>
+            <point key="canvasLocation" x="708" y="127.28635682158921"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

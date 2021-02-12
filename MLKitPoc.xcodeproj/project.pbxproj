@@ -40,6 +40,8 @@
 		B8ACA65225D2E2700029F3C6 /* AssetCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8ACA65125D2E2700029F3C6 /* AssetCollection.swift */; };
 		B8ACA65625D2EE5C0029F3C6 /* AssetAssetCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8ACA65525D2EE5C0029F3C6 /* AssetAssetCollection.swift */; };
 		B8ACA66B25D321850029F3C6 /* AssetFaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8ACA66A25D321850029F3C6 /* AssetFaces.swift */; };
+		B8E1781625D6689F00FD5AB3 /* FaceHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8E1781525D6689F00FD5AB3 /* FaceHeader.xib */; };
+		B8E1781725D6689F00FD5AB3 /* FaceHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8E1781525D6689F00FD5AB3 /* FaceHeader.xib */; };
 		B8F4AACE25CC508700B6F99C /* FaceDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F4AACD25CC508700B6F99C /* FaceDetection.swift */; };
 		B8F4AAD425CD521A00B6F99C /* MLKitImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F4AAD325CD521A00B6F99C /* MLKitImage.swift */; };
 		B8F4AAD925CD53F400B6F99C /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F4AAD825CD53F400B6F99C /* Logger.swift */; };
@@ -84,6 +86,7 @@
 		B8ACA65125D2E2700029F3C6 /* AssetCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCollection.swift; sourceTree = "<group>"; };
 		B8ACA65525D2EE5C0029F3C6 /* AssetAssetCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetAssetCollection.swift; sourceTree = "<group>"; };
 		B8ACA66A25D321850029F3C6 /* AssetFaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetFaces.swift; sourceTree = "<group>"; };
+		B8E1781525D6689F00FD5AB3 /* FaceHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FaceHeader.xib; sourceTree = "<group>"; };
 		B8F4AACD25CC508700B6F99C /* FaceDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetection.swift; sourceTree = "<group>"; };
 		B8F4AAD325CD521A00B6F99C /* MLKitImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLKitImage.swift; sourceTree = "<group>"; };
 		B8F4AAD825CD53F400B6F99C /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -257,6 +260,7 @@
 				11E1BB9A1CF1371A0057E18F /* FaceClusteringViewCell.swift */,
 				118FE1191CEF0525004F2F51 /* FaceClusteringViewController.swift */,
 				B8FAE09725D5243500511831 /* FaceClusteringViewModel.swift */,
+				B8E1781525D6689F00FD5AB3 /* FaceHeader.xib */,
 			);
 			path = FaceClustering;
 			sourceTree = "<group>";
@@ -377,6 +381,7 @@
 				118FE1221CEF0525004F2F51 /* LaunchScreen.storyboard in Resources */,
 				118FE11F1CEF0525004F2F51 /* Assets.xcassets in Resources */,
 				118FE11D1CEF0525004F2F51 /* Main.storyboard in Resources */,
+				B8E1781625D6689F00FD5AB3 /* FaceHeader.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,6 +390,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				118FE1371CEF07DE004F2F51 /* Assets.xcassets in Resources */,
+				B8E1781725D6689F00FD5AB3 /* FaceHeader.xib in Resources */,
 				118FE1351CEF07DE004F2F51 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
