@@ -24,8 +24,9 @@ class FaceClusteringViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let nib = UINib(nibName: "FaceHeader", bundle:nil)
-        self.collectionView.register(nib, forCellWithReuseIdentifier: "FaceHeader")
+        collectionView.register(UINib(nibName: FaceHeader.identifier, bundle: Bundle.main),
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: FaceHeader.identifier)
         
         resetCachedAssets()
         PHPhotoLibrary.shared().register(self)
@@ -62,6 +63,7 @@ class FaceClusteringViewController: UICollectionViewController {
             let itemLength = (availableWidth - columnCount - 1) / columnCount
             collectionViewFlowLayout.itemSize = CGSize(width: itemLength, height: itemLength)
         }
+        collectionViewFlowLayout.headerReferenceSize = CGSize(width: self.availableWidth, height: 120)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -83,7 +85,8 @@ class FaceClusteringViewController: UICollectionViewController {
         guard let collectionViewCell = sender as? UICollectionViewCell else { fatalError("Unexpected sender for segue") }
         
         let indexPath = collectionView.indexPath(for: collectionViewCell)!
-        destination.asset = fetchResult.object(at: indexPath.item)
+        let detectedFace = viewModel.detectedFaceIds[indexPath.section]
+        destination.asset = viewModel.fetchAsset(for: detectedFace, index: indexPath.item)
         destination.assetCollection = viewModel.phAssetCollection
     }
     
@@ -118,7 +121,8 @@ class FaceClusteringViewController: UICollectionViewController {
         }
 
         let faceId = viewModel.detectedFaceIds[indexPath.section]
-        faceHeader.setData(faceId: faceId)
+        let image = viewModel.fetchFaceImage(trackingId: faceId)
+        faceHeader.setData(faceId: faceId, image: image)
         return faceHeader
     }
 

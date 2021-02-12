@@ -9,14 +9,16 @@
 import UIKit
 
 class FaceHeader: UICollectionReusableView {
-    @IBOutlet var faceIdLabel: UILabel!
+    static let identifier = "FaceHeader"
 
+    @IBOutlet private var faceThumbnail: UIImageView!
     override func prepareForReuse() {
         super.prepareForReuse()
-        faceIdLabel.text = ""
+        faceThumbnail.image = nil
     }
 
-    func setData(faceId: Int16){
-        faceIdLabel.text = String("Face: \(faceId)")
+    func setData(faceId: Int16, image: UIImage) {
+        faceThumbnail.image = image
+        faceThumbnail.contentMode = .scaleAspectFill
     }
 }
