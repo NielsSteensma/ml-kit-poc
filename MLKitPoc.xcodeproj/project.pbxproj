@@ -29,6 +29,18 @@
 		B8449E4B25D56ED0003BD990 /* NsManagedObjectContextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8449E4925D56ED0003BD990 /* NsManagedObjectContextExtensions.swift */; };
 		B845CBEB25D6CE3B00958678 /* FaceHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = B845CBEA25D6CE3B00958678 /* FaceHeader.xib */; };
 		B845CBEC25D6CE3B00958678 /* FaceHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = B845CBEA25D6CE3B00958678 /* FaceHeader.xib */; };
+		B845CC0725D7C9B600958678 /* DetectedFacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B845CC0625D7C9B600958678 /* DetectedFacesViewController.swift */; };
+		B845CC0825D7C9B600958678 /* DetectedFacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B845CC0625D7C9B600958678 /* DetectedFacesViewController.swift */; };
+		B845CC0C25D7CA4300958678 /* DetectedFacesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B845CC0B25D7CA4300958678 /* DetectedFacesViewModel.swift */; };
+		B845CC0D25D7CA4300958678 /* DetectedFacesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B845CC0B25D7CA4300958678 /* DetectedFacesViewModel.swift */; };
+		B845CC1125D7D69F00958678 /* ImageThumbnailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B845CC1025D7D69F00958678 /* ImageThumbnailViewCell.swift */; };
+		B845CC1225D7D69F00958678 /* ImageThumbnailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B845CC1025D7D69F00958678 /* ImageThumbnailViewCell.swift */; };
+		B845CC1725D7F38400958678 /* DetectedFaceAssetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B845CC1625D7F38400958678 /* DetectedFaceAssetsViewController.swift */; };
+		B845CC1825D7F38400958678 /* DetectedFaceAssetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B845CC1625D7F38400958678 /* DetectedFaceAssetsViewController.swift */; };
+		B845CC1C25D7F3B900958678 /* DetectedFaceAssetsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B845CC1B25D7F3B900958678 /* DetectedFaceAssetsViewModel.swift */; };
+		B845CC1D25D7F3B900958678 /* DetectedFaceAssetsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B845CC1B25D7F3B900958678 /* DetectedFaceAssetsViewModel.swift */; };
+		B845CC2125D8238E00958678 /* ImageThumbnailViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B845CC2025D8238E00958678 /* ImageThumbnailViewCell.xib */; };
+		B845CC2225D8238E00958678 /* ImageThumbnailViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B845CC2025D8238E00958678 /* ImageThumbnailViewCell.xib */; };
 		B8626F5D25D48B0A00A43A10 /* FaceHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8626F5C25D48B0A00A43A10 /* FaceHeader.swift */; };
 		B8626F5E25D48B0A00A43A10 /* FaceHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8626F5C25D48B0A00A43A10 /* FaceHeader.swift */; };
 		B8643DBF25D334B80081797A /* FacesAssetCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8643DBE25D334B80081797A /* FacesAssetCollection.swift */; };
@@ -78,6 +90,12 @@
 		B828CB4F25D288BC002C71FE /* Asset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
 		B8449E4925D56ED0003BD990 /* NsManagedObjectContextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NsManagedObjectContextExtensions.swift; sourceTree = "<group>"; };
 		B845CBEA25D6CE3B00958678 /* FaceHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FaceHeader.xib; sourceTree = "<group>"; };
+		B845CC0625D7C9B600958678 /* DetectedFacesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectedFacesViewController.swift; sourceTree = "<group>"; };
+		B845CC0B25D7CA4300958678 /* DetectedFacesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectedFacesViewModel.swift; sourceTree = "<group>"; };
+		B845CC1025D7D69F00958678 /* ImageThumbnailViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageThumbnailViewCell.swift; sourceTree = "<group>"; };
+		B845CC1625D7F38400958678 /* DetectedFaceAssetsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectedFaceAssetsViewController.swift; sourceTree = "<group>"; };
+		B845CC1B25D7F3B900958678 /* DetectedFaceAssetsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectedFaceAssetsViewModel.swift; sourceTree = "<group>"; };
+		B845CC2025D8238E00958678 /* ImageThumbnailViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageThumbnailViewCell.xib; sourceTree = "<group>"; };
 		B8626F5C25D48B0A00A43A10 /* FaceHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceHeader.swift; sourceTree = "<group>"; };
 		B8643DBE25D334B80081797A /* FacesAssetCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacesAssetCollection.swift; sourceTree = "<group>"; };
 		B884DE3925D00ACD005253A5 /* FaceClusteringViewCellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceClusteringViewCellConfigurator.swift; sourceTree = "<group>"; };
@@ -167,6 +185,8 @@
 		118FE13C1CEF07EB004F2F51 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				B845CC1525D7F35800958678 /* DetectedFaceAssets */,
+				B845CC0525D7C99A00958678 /* DetectedFaces */,
 				B845CC0225D6D07900958678 /* Collections */,
 				B8FAE0A325D540AE00511831 /* Common */,
 				B8FAE0A025D5402A00511831 /* FaceClustering */,
@@ -215,6 +235,24 @@
 				118FE1171CEF0525004F2F51 /* CollectionsViewController.swift */,
 			);
 			path = Collections;
+			sourceTree = "<group>";
+		};
+		B845CC0525D7C99A00958678 /* DetectedFaces */ = {
+			isa = PBXGroup;
+			children = (
+				B845CC0625D7C9B600958678 /* DetectedFacesViewController.swift */,
+				B845CC0B25D7CA4300958678 /* DetectedFacesViewModel.swift */,
+			);
+			path = DetectedFaces;
+			sourceTree = "<group>";
+		};
+		B845CC1525D7F35800958678 /* DetectedFaceAssets */ = {
+			isa = PBXGroup;
+			children = (
+				B845CC1625D7F38400958678 /* DetectedFaceAssetsViewController.swift */,
+				B845CC1B25D7F3B900958678 /* DetectedFaceAssetsViewModel.swift */,
+			);
+			path = DetectedFaceAssets;
 			sourceTree = "<group>";
 		};
 		B8F4AACB25CC506B00B6F99C /* MachineLearning */ = {
@@ -286,6 +324,8 @@
 		B8FAE0A425D540E500511831 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				B845CC1025D7D69F00958678 /* ImageThumbnailViewCell.swift */,
+				B845CC2025D8238E00958678 /* ImageThumbnailViewCell.xib */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -389,6 +429,7 @@
 				118FE1221CEF0525004F2F51 /* LaunchScreen.storyboard in Resources */,
 				118FE11F1CEF0525004F2F51 /* Assets.xcassets in Resources */,
 				118FE11D1CEF0525004F2F51 /* Main.storyboard in Resources */,
+				B845CC2125D8238E00958678 /* ImageThumbnailViewCell.xib in Resources */,
 				B845CBEB25D6CE3B00958678 /* FaceHeader.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -398,6 +439,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				118FE1371CEF07DE004F2F51 /* Assets.xcassets in Resources */,
+				B845CC2225D8238E00958678 /* ImageThumbnailViewCell.xib in Resources */,
 				B845CBEC25D6CE3B00958678 /* FaceHeader.xib in Resources */,
 				118FE1351CEF07DE004F2F51 /* Main.storyboard in Resources */,
 			);
@@ -513,12 +555,16 @@
 				B8F4AACE25CC508700B6F99C /* FaceDetection.swift in Sources */,
 				B8ACA66B25D321850029F3C6 /* AssetFaces.swift in Sources */,
 				B8F4AAE125CD6E6900B6F99C /* MLKitPoc.xcdatamodeld in Sources */,
+				B845CC1725D7F38400958678 /* DetectedFaceAssetsViewController.swift in Sources */,
+				B845CC0725D7C9B600958678 /* DetectedFacesViewController.swift in Sources */,
 				B884DE3F25D12606005253A5 /* PHImageManagerExtensions.swift in Sources */,
 				B8ACA62A25D2CBFE0029F3C6 /* DetectedFace.swift in Sources */,
+				B845CC1C25D7F3B900958678 /* DetectedFaceAssetsViewModel.swift in Sources */,
 				B8F4AAD425CD521A00B6F99C /* MLKitImage.swift in Sources */,
 				B828CB5025D288BC002C71FE /* Asset.swift in Sources */,
 				118FE1161CEF0525004F2F51 /* AppDelegate.swift in Sources */,
 				B8F4AAFF25CDA2B300B6F99C /* FaceDetectionRunner.swift in Sources */,
+				B845CC0C25D7CA4300958678 /* DetectedFacesViewModel.swift in Sources */,
 				B8ACA65225D2E2700029F3C6 /* AssetCollection.swift in Sources */,
 				B884DE3A25D00ACD005253A5 /* FaceClusteringViewCellConfigurator.swift in Sources */,
 				B8626F5D25D48B0A00A43A10 /* FaceHeader.swift in Sources */,
@@ -527,6 +573,7 @@
 				B884DE4425D127A2005253A5 /* DBHelper.swift in Sources */,
 				B8643DBF25D334B80081797A /* FacesAssetCollection.swift in Sources */,
 				B8ACA65625D2EE5C0029F3C6 /* AssetAssetCollection.swift in Sources */,
+				B845CC1125D7D69F00958678 /* ImageThumbnailViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -534,11 +581,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B845CC1825D7F38400958678 /* DetectedFaceAssetsViewController.swift in Sources */,
+				B845CC0D25D7CA4300958678 /* DetectedFacesViewModel.swift in Sources */,
 				11E1BB9F1CF137450057E18F /* AssetViewController.swift in Sources */,
 				11E1BB9C1CF1371A0057E18F /* FaceClusteringViewCell.swift in Sources */,
+				B845CC1D25D7F3B900958678 /* DetectedFaceAssetsViewModel.swift in Sources */,
+				B845CC1225D7D69F00958678 /* ImageThumbnailViewCell.swift in Sources */,
 				118FE13D1CEF08A6004F2F51 /* AppDelegate.swift in Sources */,
 				B884DE3B25D00ACD005253A5 /* FaceClusteringViewCellConfigurator.swift in Sources */,
 				118FE13E1CEF0A0B004F2F51 /* CollectionsViewController.swift in Sources */,
+				B845CC0825D7C9B600958678 /* DetectedFacesViewController.swift in Sources */,
 				B8FAE09925D5243500511831 /* FaceClusteringViewModel.swift in Sources */,
 				B8449E4B25D56ED0003BD990 /* NsManagedObjectContextExtensions.swift in Sources */,
 				B884DE4025D12606005253A5 /* PHImageManagerExtensions.swift in Sources */,

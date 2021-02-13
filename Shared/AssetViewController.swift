@@ -6,6 +6,7 @@ import PhotosUI
  * Shows a single photo asset to the user.
  */
 class AssetViewController: UIViewController {
+    static let identifier = "AssetViewController"
     
     var asset: PHAsset!
     var assetCollection: PHAssetCollection!
