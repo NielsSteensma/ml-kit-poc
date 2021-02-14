@@ -25,11 +25,12 @@ class FaceClusteringViewModel {
         let context = DBHelper.getViewContext()
         do {
             let detectedFace = try context.fetchOne(DetectedFace.bytrackingIdFetchRequest(trackingId: trackingId))
-            return UIImage(data: detectedFace!.image)!
+            return UIImage(data: detectedFace!.imageJpegData)!
         } catch {
             fatalError(error.localizedDescription)
         }
     }
+    
     func fetchAsset(for faceId: Int16, index: Int) -> PHAsset {
         let localAssetIdentifier = assetFaces[faceId]![index].asset.localId
         let fetchedAssets = PHAsset.fetchAssets(withLocalIdentifiers: [localAssetIdentifier], options: nil)
