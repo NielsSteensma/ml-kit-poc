@@ -246,13 +246,13 @@
         <!--Main menu Controller-->
         <scene sceneID="f7d-dQ-SQ2">
             <objects>
-                <viewController id="Xp0-Eg-bVC" userLabel="Main menu Controller" sceneMemberID="viewController">
+                <viewController id="Xp0-Eg-bVC" userLabel="Main menu Controller" customClass="MainMenuController" customModule="MLKitPoc" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cvz-2S-yl8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="aRh-2b-srh">
-                                <rect key="frame" x="0.0" y="8" width="375" height="68"/>
+                                <rect key="frame" x="0.0" y="8" width="375" height="106"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T6f-lF-FVO">
                                         <rect key="frame" x="123.5" y="0.0" width="128" height="30"/>
@@ -274,6 +274,17 @@
                                         <state key="normal" title="Detected faces"/>
                                         <connections>
                                             <segue destination="ER6-Wo-bTp" kind="show" id="f92-pZ-umr"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DCW-cB-INL">
+                                        <rect key="frame" x="123.5" y="76" width="128" height="30"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="128" id="fy8-ej-zjY"/>
+                                        </constraints>
+                                        <state key="normal" title="Clean data"/>
+                                        <connections>
+                                            <action selector="onUserWantsToCleanData:" destination="Xp0-Eg-bVC" eventType="touchUpInside" id="kvW-ts-oG8"/>
                                         </connections>
                                     </button>
                                 </subviews>
