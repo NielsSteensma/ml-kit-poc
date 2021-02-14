@@ -15,12 +15,12 @@ import Photos
 class DetectedFaceAssetsViewController: UICollectionViewController {
     static let identifier =  "DetectedFaceAssetsController"
     
-    let viewModel = DetectedFaceAssetsViewModel()
+    private let viewModel = DetectedFaceAssetsViewModel()
     var detectedFace: DetectedFace!
 
     override func viewDidLoad() {
-        collectionView.register(UINib(nibName: ImageThumbnailViewCell.identifier, bundle: Bundle.main),
-                                forCellWithReuseIdentifier: ImageThumbnailViewCell.identifier)
+        collectionView.register(UINib(nibName: ThumbnailViewCell.identifier, bundle: Bundle.main),
+                                forCellWithReuseIdentifier: ThumbnailViewCell.identifier)
         viewModel.loadData(for: detectedFace)
     }
 
@@ -33,14 +33,16 @@ class DetectedFaceAssetsViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageThumbnailViewCell.identifier, for: indexPath) as? ImageThumbnailViewCell else {
-            fatalError("Unable to find image thumbnail view cell")
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ThumbnailViewCell.identifier, for: indexPath) as? ThumbnailViewCell else {
+            fatalError(ThumbnailViewCell.unwrapError)
         }
         let asset = viewModel.assets![indexPath.item]
         let phAsset = viewModel.fetchAsset(localIdentifier: asset.asset.localId)
         PHImageManager.default().requestThumbnailForAssetGrid(for: phAsset,
                                                               thumbnailSize: CGSize(width: 100, height: 100)) { image in
-            cell.setData(thumbnail: image!)
+            if let thumbnailImage = image {
+                cell.configure(for: thumbnailImage)
+            }
         }
         return cell
     }

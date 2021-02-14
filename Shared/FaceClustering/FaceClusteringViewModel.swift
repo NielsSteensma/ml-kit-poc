@@ -25,7 +25,7 @@ class FaceClusteringViewModel {
         let context = DBHelper.getViewContext()
         do {
             let detectedFace = try context.fetchOne(DetectedFace.bytrackingIdFetchRequest(trackingId: trackingId))
-            return UIImage(data: detectedFace!.image)!
+            return UIImage(data: detectedFace!.imageJpegData)!
         } catch {
             fatalError(error.localizedDescription)
         }

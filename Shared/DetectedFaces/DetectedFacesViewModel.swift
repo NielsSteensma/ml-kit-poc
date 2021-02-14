@@ -17,7 +17,7 @@ class DetectedFacesViewModel {
         do {
             detectedFaces = try context.fetch(DetectedFace.fetchRequest()) as? [DetectedFace]
         } catch {
-            print(error)
+            fatalError(error.localizedDescription)
         }
     }
 }

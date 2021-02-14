@@ -15,7 +15,8 @@ class DetectedFacesViewController : UICollectionViewController {
     private let viewModel = DetectedFacesViewModel()
 
     override func viewDidLoad() {
-        collectionView.register(UINib(nibName: ImageThumbnailViewCell.identifier, bundle: Bundle.main), forCellWithReuseIdentifier: ImageThumbnailViewCell.identifier)
+        collectionView.register(UINib(nibName: ThumbnailViewCell.identifier, bundle: Bundle.main),
+                                forCellWithReuseIdentifier: ThumbnailViewCell.identifier)
         viewModel.loadData()
     }
     
@@ -28,11 +29,13 @@ class DetectedFacesViewController : UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageThumbnailViewCell.identifier, for: indexPath) as? ImageThumbnailViewCell else {
-            fatalError("Unable to find image thumbnail view cell")
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ThumbnailViewCell.identifier, for: indexPath) as? ThumbnailViewCell else {
+            fatalError(ThumbnailViewCell.unwrapError)
         }
         let detectedFace = viewModel.detectedFaces[indexPath.item]
-        cell.setData(thumbnail: UIImage(data: detectedFace.image)!)
+        if let faceThumbnail = UIImage(data: detectedFace.imageJpegData) {
+            cell.configure(for: faceThumbnail)
+        }
         return cell
     }
 

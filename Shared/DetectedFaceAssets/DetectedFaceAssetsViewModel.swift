@@ -16,7 +16,7 @@ class DetectedFaceAssetsViewModel {
         do {
             assets = try context.fetch(AssetFaces.byDetectedFaceFetchRequest(detectedFace: detectedFace))
         } catch{
-            fatalError("Error while fetching asset faces")
+            fatalError(error.localizedDescription)
         }
     }
 

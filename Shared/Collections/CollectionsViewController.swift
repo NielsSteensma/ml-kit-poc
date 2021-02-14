@@ -9,6 +9,9 @@ import UIKit
 import Photos
 import CoreML
 
+/**
+ Shows a table of all PHAssetCollections retrieved from Apple Photos.
+ */
 class CollectionsViewController: UITableViewController {
     
     // MARK: Types for managing sections, cell, and segue identifiers
