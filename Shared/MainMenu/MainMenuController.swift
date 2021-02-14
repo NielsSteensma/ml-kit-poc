@@ -12,6 +12,7 @@ import UIKit
  Shows the main menu of the app.
  */
 class MainMenuController: UIViewController {
+    private let viewModel = MainMenuViewModel()
 
     @IBAction func onUserWantsToCleanData(_ sender: Any) {
         // Verify the delete
@@ -20,32 +21,18 @@ class MainMenuController: UIViewController {
                                                             preferredStyle: .alert)
         confirmationAlertController.addAction(UIAlertAction(title: "No", style: .cancel))
         confirmationAlertController.addAction(UIAlertAction(title: "Yes", style: .destructive){ [weak self] _ in
-            self?.cleanDatabase()
+            self?.viewModel.cleanDatabase() {
+                self?.showDatabaseCleanSuccesAlert()
+            }
         })
         present(confirmationAlertController, animated: false)
     }
 
-    private func cleanDatabase() {
-        let context = DBHelper.getViewContext()
-        context.performAndWait {
-            do{
-                try context.execute(Asset.batchDeleteRequest)
-                try context.execute(DetectedFace.batchDeleteRequest)
-                try context.execute(AssetCollection.batchDeleteRequest)
-                try context.execute(AssetAssetCollection.batchDeleteRequest)
-                try context.execute(AssetFaces.batchDeleteRequest)
-                try context.save()
-
-                // Show succes
-                let succesAlertController = UIAlertController(title: "Succes!",
-                                                              message: "The database was cleaned",
-                                                              preferredStyle: .alert)
-                succesAlertController.addAction(UIAlertAction(title: "Okay", style: .default))
-                present(succesAlertController, animated: false)
-
-            } catch {
-                fatalError(error.localizedDescription)
-            }
-        }
+    private func showDatabaseCleanSuccesAlert() {
+        let succesAlertController = UIAlertController(title: "Succes",
+                                                      message: "The database was cleaned successfully!",
+                                                      preferredStyle: .alert)
+        succesAlertController.addAction(UIAlertAction(title: "Okay", style: .default))
+        present(succesAlertController, animated: false)
     }
 }

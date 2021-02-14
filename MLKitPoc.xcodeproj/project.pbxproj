@@ -55,6 +55,7 @@
 		B8ACA65625D2EE5C0029F3C6 /* AssetAssetCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8ACA65525D2EE5C0029F3C6 /* AssetAssetCollection.swift */; };
 		B8ACA66B25D321850029F3C6 /* AssetFaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8ACA66A25D321850029F3C6 /* AssetFaces.swift */; };
 		B8E0C51525D9287000236674 /* MainMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E0C51425D9287000236674 /* MainMenuController.swift */; };
+		B8E0C51925D9399300236674 /* MainMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E0C51825D9399300236674 /* MainMenuViewModel.swift */; };
 		B8F4AACE25CC508700B6F99C /* FaceDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F4AACD25CC508700B6F99C /* FaceDetection.swift */; };
 		B8F4AAD425CD521A00B6F99C /* MLKitImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F4AAD325CD521A00B6F99C /* MLKitImage.swift */; };
 		B8F4AAD925CD53F400B6F99C /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F4AAD825CD53F400B6F99C /* Logger.swift */; };
@@ -107,6 +108,7 @@
 		B8ACA65525D2EE5C0029F3C6 /* AssetAssetCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetAssetCollection.swift; sourceTree = "<group>"; };
 		B8ACA66A25D321850029F3C6 /* AssetFaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetFaces.swift; sourceTree = "<group>"; };
 		B8E0C51425D9287000236674 /* MainMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuController.swift; sourceTree = "<group>"; };
+		B8E0C51825D9399300236674 /* MainMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewModel.swift; sourceTree = "<group>"; };
 		B8F4AACD25CC508700B6F99C /* FaceDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetection.swift; sourceTree = "<group>"; };
 		B8F4AAD325CD521A00B6F99C /* MLKitImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLKitImage.swift; sourceTree = "<group>"; };
 		B8F4AAD825CD53F400B6F99C /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				B8E0C51425D9287000236674 /* MainMenuController.swift */,
+				B8E0C51825D9399300236674 /* MainMenuViewModel.swift */,
 			);
 			path = MainMenu;
 			sourceTree = "<group>";
@@ -566,6 +569,7 @@
 				B8E0C51525D9287000236674 /* MainMenuController.swift in Sources */,
 				B8F4AACE25CC508700B6F99C /* FaceDetection.swift in Sources */,
 				B8ACA66B25D321850029F3C6 /* AssetFaces.swift in Sources */,
+				B8E0C51925D9399300236674 /* MainMenuViewModel.swift in Sources */,
 				B8F4AAE125CD6E6900B6F99C /* MLKitPoc.xcdatamodeld in Sources */,
 				B845CC1725D7F38400958678 /* DetectedFaceAssetsViewController.swift in Sources */,
 				B845CC0725D7C9B600958678 /* DetectedFacesViewController.swift in Sources */,
