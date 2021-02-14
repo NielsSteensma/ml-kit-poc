@@ -54,6 +54,8 @@
 		B8ACA65225D2E2700029F3C6 /* AssetCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8ACA65125D2E2700029F3C6 /* AssetCollection.swift */; };
 		B8ACA65625D2EE5C0029F3C6 /* AssetAssetCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8ACA65525D2EE5C0029F3C6 /* AssetAssetCollection.swift */; };
 		B8ACA66B25D321850029F3C6 /* AssetFaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8ACA66A25D321850029F3C6 /* AssetFaces.swift */; };
+		B8E0C51525D9287000236674 /* MainMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E0C51425D9287000236674 /* MainMenuController.swift */; };
+		B8E0C51925D9399300236674 /* MainMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E0C51825D9399300236674 /* MainMenuViewModel.swift */; };
 		B8F4AACE25CC508700B6F99C /* FaceDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F4AACD25CC508700B6F99C /* FaceDetection.swift */; };
 		B8F4AAD425CD521A00B6F99C /* MLKitImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F4AAD325CD521A00B6F99C /* MLKitImage.swift */; };
 		B8F4AAD925CD53F400B6F99C /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F4AAD825CD53F400B6F99C /* Logger.swift */; };
@@ -105,6 +107,8 @@
 		B8ACA65125D2E2700029F3C6 /* AssetCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCollection.swift; sourceTree = "<group>"; };
 		B8ACA65525D2EE5C0029F3C6 /* AssetAssetCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetAssetCollection.swift; sourceTree = "<group>"; };
 		B8ACA66A25D321850029F3C6 /* AssetFaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetFaces.swift; sourceTree = "<group>"; };
+		B8E0C51425D9287000236674 /* MainMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuController.swift; sourceTree = "<group>"; };
+		B8E0C51825D9399300236674 /* MainMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewModel.swift; sourceTree = "<group>"; };
 		B8F4AACD25CC508700B6F99C /* FaceDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetection.swift; sourceTree = "<group>"; };
 		B8F4AAD325CD521A00B6F99C /* MLKitImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLKitImage.swift; sourceTree = "<group>"; };
 		B8F4AAD825CD53F400B6F99C /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -185,6 +189,7 @@
 		118FE13C1CEF07EB004F2F51 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				B8E0C51325D9285F00236674 /* MainMenu */,
 				B845CC1525D7F35800958678 /* DetectedFaceAssets */,
 				B845CC0525D7C99A00958678 /* DetectedFaces */,
 				B845CC0225D6D07900958678 /* Collections */,
@@ -253,6 +258,15 @@
 				B845CC1B25D7F3B900958678 /* DetectedFaceAssetsViewModel.swift */,
 			);
 			path = DetectedFaceAssets;
+			sourceTree = "<group>";
+		};
+		B8E0C51325D9285F00236674 /* MainMenu */ = {
+			isa = PBXGroup;
+			children = (
+				B8E0C51425D9287000236674 /* MainMenuController.swift */,
+				B8E0C51825D9399300236674 /* MainMenuViewModel.swift */,
+			);
+			path = MainMenu;
 			sourceTree = "<group>";
 		};
 		B8F4AACB25CC506B00B6F99C /* MachineLearning */ = {
@@ -552,8 +566,10 @@
 				118FE11A1CEF0525004F2F51 /* FaceClusteringViewController.swift in Sources */,
 				118FE1181CEF0525004F2F51 /* CollectionsViewController.swift in Sources */,
 				B8FAE09825D5243500511831 /* FaceClusteringViewModel.swift in Sources */,
+				B8E0C51525D9287000236674 /* MainMenuController.swift in Sources */,
 				B8F4AACE25CC508700B6F99C /* FaceDetection.swift in Sources */,
 				B8ACA66B25D321850029F3C6 /* AssetFaces.swift in Sources */,
+				B8E0C51925D9399300236674 /* MainMenuViewModel.swift in Sources */,
 				B8F4AAE125CD6E6900B6F99C /* MLKitPoc.xcdatamodeld in Sources */,
 				B845CC1725D7F38400958678 /* DetectedFaceAssetsViewController.swift in Sources */,
 				B845CC0725D7C9B600958678 /* DetectedFacesViewController.swift in Sources */,
