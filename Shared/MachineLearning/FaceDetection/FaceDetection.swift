@@ -15,19 +15,11 @@ import CoreData
  */
 class FaceDetection {
     typealias FaceDetectionResultsHandler = ((_ results: Result) -> Void)
-    private let faceDetector: FaceDetector
     private static let TAG = "FaceDetection"
 
     struct Result {
         let amountOfFaces: Int
         let faces: [Face]
-    }
-
-    init() {
-        let options = FaceDetectorOptions()
-        options.performanceMode = .accurate
-        options.isTrackingEnabled = true
-        self.faceDetector = FaceDetector.faceDetector(options: options)
     }
 
     func detect(for image: MLKitImage, completion: FaceDetectionResultsHandler?) {
@@ -36,7 +28,12 @@ class FaceDetection {
         let visionImage = VisionImage(image: image.uiImage)
         visionImage.orientation = image.uiImage.imageOrientation
 
-        faceDetector.process(visionImage) { [weak self] faces, error in
+
+        guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
+            fatalError("Unable to get FaceDetector")
+        }
+
+        delegate.faceDetector.process(visionImage) { [weak self] faces, error in
             guard let self = self else {
                 return
             }
@@ -71,7 +68,6 @@ class FaceDetection {
         var createdAsset: Asset?
         context.performAndWait {
             do {
-                print("TEST: saveAssetInDB - Collection: \(mlKitImage.assetCollection.localId)")
                 // Save asset
                 let asset = Asset(context: context)
                 asset.localId = mlKitImage.asset.localIdentifier
@@ -95,7 +91,6 @@ class FaceDetection {
             do {
                 // Create each detected face if it doesn't yet exist
                 for face in result.faces {
-                    print("TEST: saveDetectedFaceTrackingIds - Collection: \(mlKitImage.assetCollection.localId)")
                     var detectedFace = try context.fetch(DetectedFace.bytrackingIdFetchRequest(trackingId: Int16(face.trackingID))).first
                     if detectedFace == nil {
                         detectedFace = DetectedFace(context: context)

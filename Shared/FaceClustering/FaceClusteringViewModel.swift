@@ -16,14 +16,17 @@ class FaceClusteringViewModel {
     private(set) var detectedFaceIds: [Int16] = []
     private(set) var assetFaces: [Int16: [AssetFaces]] = [:]
     var phAssetCollection: PHAssetCollection
+    private let faceDetectionRunner = FaceDetectionRunner()
 
     init(phAssetCollection: PHAssetCollection) {
         self.phAssetCollection = phAssetCollection
     }
 
     func runFaceDetection(completion: @escaping () -> Void) {
-        FaceDetectionRunner.instance.runForCollection(collection: phAssetCollection) {
-            completion()
+        faceDetectionRunner.run(for: phAssetCollection) {
+            DispatchQueue.main.async {
+                completion()
+            }
         }
     }
 

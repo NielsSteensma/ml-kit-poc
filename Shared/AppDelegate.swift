@@ -8,6 +8,7 @@ Contains the sample's app delegate.
 import UIKit
 import Photos
 import CoreData
+import MLKitFaceDetection
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
@@ -22,6 +23,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             }
         }
         return container
+    }()
+
+    /// We want to keep this in the app delegate so we work with a single instance, otherwise facetracking may give wrong results
+    lazy var faceDetector: FaceDetector = {
+        let options = FaceDetectorOptions()
+        options.performanceMode = .accurate
+        options.isTrackingEnabled = true
+        return FaceDetector.faceDetector(options: options)
     }()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
