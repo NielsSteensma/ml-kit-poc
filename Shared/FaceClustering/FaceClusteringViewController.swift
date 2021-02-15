@@ -30,23 +30,7 @@ class FaceClusteringViewController: UICollectionViewController {
         
         resetCachedAssets()
         PHPhotoLibrary.shared().register(self)
-        
-        // Reaching this point without a segue means that this AssetGridViewController
-        // became visible at app launch. As such, match the behavior of the segue from
-        // the default "All Photos" view.
-        if fetchResult == nil {
-            let allPhotosOptions = PHFetchOptions()
-            allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
-            fetchResult = PHAsset.fetchAssets(with: allPhotosOptions)
-        }
-
-        FaceDetectionRunner.instance.run(for: viewModel.phAssetCollection) { [weak self] in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.viewModel.updateData()
-                self.collectionView.reloadData()
-            }
-        }
+        viewModel.loadData()
     }
     
     deinit {
@@ -194,6 +178,21 @@ class FaceClusteringViewController: UICollectionViewController {
         } else {
             return ([new], [old])
         }
+    }
+
+    @IBAction func onUserWantsToScanCollection(_ sender: Any) {
+        viewModel.runFaceDetection {
+            self.showCollectionScanSuccesAlert()
+            self.collectionView.reloadData()
+        }
+    }
+
+    private func showCollectionScanSuccesAlert() {
+        let succesAlertController = UIAlertController(title: "Success",
+                                                      message: "The collection was scanned successfully",
+                                                      preferredStyle: .alert)
+        succesAlertController.addAction(UIAlertAction(title: "Okay", style: .default))
+        present(succesAlertController, animated: false)
     }
 }
 

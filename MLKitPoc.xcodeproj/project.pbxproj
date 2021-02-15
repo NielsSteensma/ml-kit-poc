@@ -274,7 +274,6 @@
 			children = (
 				B8F4AACC25CC507600B6F99C /* FaceDetection */,
 				B8F4AAD325CD521A00B6F99C /* MLKitImage.swift */,
-				B8F4AAFE25CDA2B300B6F99C /* FaceDetectionRunner.swift */,
 			);
 			path = MachineLearning;
 			sourceTree = "<group>";
@@ -282,6 +281,7 @@
 		B8F4AACC25CC507600B6F99C /* FaceDetection */ = {
 			isa = PBXGroup;
 			children = (
+				B8F4AAFE25CDA2B300B6F99C /* FaceDetectionRunner.swift */,
 				B8F4AACD25CC508700B6F99C /* FaceDetection.swift */,
 			);
 			path = FaceDetection;

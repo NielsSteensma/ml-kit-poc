@@ -10,6 +10,11 @@
  Viewmodel associated with the main menu.
  */
 class MainMenuViewModel {
+
+    func runFaceClusteringForAllAlbums(completionHandler: @escaping () -> Void) {
+        FaceDetectionRunner.instance.runForAll(completion: completionHandler)
+    }
+
     func cleanDatabase(succesHandler: () -> Void) {
         let context = DBHelper.getViewContext()
         context.performAndWait {

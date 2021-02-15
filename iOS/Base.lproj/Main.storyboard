@@ -234,7 +234,13 @@
                             <outlet property="delegate" destination="mEd-c0-4A5" id="ATN-SF-2Ph"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="7Fh-Zb-LGx"/>
+                    <navigationItem key="navigationItem" id="7Fh-Zb-LGx">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="scanner" catalog="system" id="Oxf-i1-8w3">
+                            <connections>
+                                <action selector="onUserWantsToScanCollection:" destination="mEd-c0-4A5" id="f7O-mA-yOB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionViewFlowLayout" destination="DJA-Lb-Xgj" id="52G-0D-PGQ"/>
                     </connections>
@@ -252,7 +258,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="aRh-2b-srh">
-                                <rect key="frame" x="0.0" y="8" width="375" height="106"/>
+                                <rect key="frame" x="0.0" y="8" width="375" height="144"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T6f-lF-FVO">
                                         <rect key="frame" x="123.5" y="0.0" width="128" height="30"/>
@@ -276,8 +282,19 @@
                                             <segue destination="ER6-Wo-bTp" kind="show" id="f92-pZ-umr"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DCW-cB-INL">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GuY-3A-ggO">
                                         <rect key="frame" x="123.5" y="76" width="128" height="30"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="128" id="d2L-ew-h2s"/>
+                                        </constraints>
+                                        <state key="normal" title="Run for all albums"/>
+                                        <connections>
+                                            <action selector="onUserWantsToRunForAllAssets:" destination="Xp0-Eg-bVC" eventType="touchUpInside" id="yv9-6C-Nxa"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DCW-cB-INL">
+                                        <rect key="frame" x="123.5" y="114" width="128" height="30"/>
                                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="128" id="fy8-ej-zjY"/>
@@ -309,7 +326,7 @@
             <objects>
                 <collectionViewController id="ER6-Wo-bTp" customClass="DetectedFacesViewController" customModule="MLKitPoc" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="ubj-dp-O6X">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fnO-8r-Nb8">
@@ -324,7 +341,9 @@
                             <outlet property="delegate" destination="ER6-Wo-bTp" id="QzT-Dm-Psc"/>
                         </connections>
                     </collectionView>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Detected faces" id="zNn-az-yLd"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bg1-wd-hOv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -361,6 +380,7 @@
         <segue reference="isy-3O-iv3"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="scanner" catalog="system" width="128" height="93"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

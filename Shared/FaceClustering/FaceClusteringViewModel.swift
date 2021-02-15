@@ -21,6 +21,12 @@ class FaceClusteringViewModel {
         self.phAssetCollection = phAssetCollection
     }
 
+    func runFaceDetection(completion: @escaping () -> Void) {
+        FaceDetectionRunner.instance.runForCollection(collection: phAssetCollection) {
+            completion()
+        }
+    }
+
     func fetchFaceImage(trackingId: Int16) -> UIImage {
         let context = DBHelper.getViewContext()
         do {
@@ -37,7 +43,7 @@ class FaceClusteringViewModel {
         return fetchedAssets.firstObject!
     }
 
-    func updateData() {
+    func loadData() {
         updateSections()
         updateAssetFaces()
     }
