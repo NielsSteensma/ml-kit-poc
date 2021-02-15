@@ -6,10 +6,22 @@
 //  Copyright © 2021 Apple. All rights reserved.
 //
 
+import Foundation
+
 /**
  Viewmodel associated with the main menu.
  */
 class MainMenuViewModel {
+    private let faceDetectionRunner = FaceDetectionRunner()
+
+    func runFaceClusteringForAllAlbums(completion: @escaping () -> Void) {
+        faceDetectionRunner.run() {
+            DispatchQueue.main.async {
+                completion()
+            }
+        }
+    }
+
     func cleanDatabase(succesHandler: () -> Void) {
         let context = DBHelper.getViewContext()
         context.performAndWait {

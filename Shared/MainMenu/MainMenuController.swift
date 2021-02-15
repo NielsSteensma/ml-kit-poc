@@ -14,6 +14,16 @@ import UIKit
 class MainMenuController: UIViewController {
     private let viewModel = MainMenuViewModel()
 
+    @IBAction func onUserWantsToRunForAllAssets(_ sender: Any) {
+        viewModel.runFaceClusteringForAllAlbums() { [weak self] in
+            let finishAlertController = UIAlertController(title: "Finished",
+                                                      message: "The analysis got finished. Check out the results in collections/detected faces",
+                                                      preferredStyle: .alert)
+            finishAlertController.addAction(UIAlertAction(title: "Okay", style: .default))
+            self?.present(finishAlertController, animated: false)
+        }
+    }
+
     @IBAction func onUserWantsToCleanData(_ sender: Any) {
         // Verify the delete
         let confirmationAlertController = UIAlertController(title: "Confirmation",

@@ -61,6 +61,8 @@
 		B8F4AAD925CD53F400B6F99C /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F4AAD825CD53F400B6F99C /* Logger.swift */; };
 		B8F4AAE125CD6E6900B6F99C /* MLKitPoc.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B8F4AADF25CD6E6900B6F99C /* MLKitPoc.xcdatamodeld */; };
 		B8F4AAFF25CDA2B300B6F99C /* FaceDetectionRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F4AAFE25CDA2B300B6F99C /* FaceDetectionRunner.swift */; };
+		B8F5228A25DAA3F500CDEC26 /* CollectionFaceDetectionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F5228925DAA3F500CDEC26 /* CollectionFaceDetectionOperation.swift */; };
+		B8F5228E25DAB22300CDEC26 /* ConcurrentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F5228D25DAB22300CDEC26 /* ConcurrentOperation.swift */; };
 		B8FAE09825D5243500511831 /* FaceClusteringViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FAE09725D5243500511831 /* FaceClusteringViewModel.swift */; };
 		B8FAE09925D5243500511831 /* FaceClusteringViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FAE09725D5243500511831 /* FaceClusteringViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -114,6 +116,8 @@
 		B8F4AAD825CD53F400B6F99C /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		B8F4AAE025CD6E6900B6F99C /* MLKitPoc.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MLKitPoc.xcdatamodel; sourceTree = "<group>"; };
 		B8F4AAFE25CDA2B300B6F99C /* FaceDetectionRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetectionRunner.swift; sourceTree = "<group>"; };
+		B8F5228925DAA3F500CDEC26 /* CollectionFaceDetectionOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionFaceDetectionOperation.swift; sourceTree = "<group>"; };
+		B8F5228D25DAB22300CDEC26 /* ConcurrentOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrentOperation.swift; sourceTree = "<group>"; };
 		B8FAE09725D5243500511831 /* FaceClusteringViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceClusteringViewModel.swift; sourceTree = "<group>"; };
 		B9985AA18D9FB8365E43B0AB /* Pods-MLKitPoc iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLKitPoc iOS.debug.xcconfig"; path = "Target Support Files/Pods-MLKitPoc iOS/Pods-MLKitPoc iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		C8F473CAF7C3A576C3D346BE /* Pods-PhotoBrowse iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoBrowse iOS.debug.xcconfig"; path = "Target Support Files/Pods-PhotoBrowse iOS/Pods-PhotoBrowse iOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -274,7 +278,6 @@
 			children = (
 				B8F4AACC25CC507600B6F99C /* FaceDetection */,
 				B8F4AAD325CD521A00B6F99C /* MLKitImage.swift */,
-				B8F4AAFE25CDA2B300B6F99C /* FaceDetectionRunner.swift */,
 			);
 			path = MachineLearning;
 			sourceTree = "<group>";
@@ -282,7 +285,9 @@
 		B8F4AACC25CC507600B6F99C /* FaceDetection */ = {
 			isa = PBXGroup;
 			children = (
+				B8F4AAFE25CDA2B300B6F99C /* FaceDetectionRunner.swift */,
 				B8F4AACD25CC508700B6F99C /* FaceDetection.swift */,
+				B8F5228925DAA3F500CDEC26 /* CollectionFaceDetectionOperation.swift */,
 			);
 			path = FaceDetection;
 			sourceTree = "<group>";
@@ -294,6 +299,7 @@
 				B884DE3E25D12606005253A5 /* PHImageManagerExtensions.swift */,
 				B884DE4325D127A2005253A5 /* DBHelper.swift */,
 				B8449E4925D56ED0003BD990 /* NsManagedObjectContextExtensions.swift */,
+				B8F5228D25DAB22300CDEC26 /* ConcurrentOperation.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -565,9 +571,11 @@
 				11E1BB9B1CF1371A0057E18F /* FaceClusteringViewCell.swift in Sources */,
 				118FE11A1CEF0525004F2F51 /* FaceClusteringViewController.swift in Sources */,
 				118FE1181CEF0525004F2F51 /* CollectionsViewController.swift in Sources */,
+				B8F5228A25DAA3F500CDEC26 /* CollectionFaceDetectionOperation.swift in Sources */,
 				B8FAE09825D5243500511831 /* FaceClusteringViewModel.swift in Sources */,
 				B8E0C51525D9287000236674 /* MainMenuController.swift in Sources */,
 				B8F4AACE25CC508700B6F99C /* FaceDetection.swift in Sources */,
+				B8F5228E25DAB22300CDEC26 /* ConcurrentOperation.swift in Sources */,
 				B8ACA66B25D321850029F3C6 /* AssetFaces.swift in Sources */,
 				B8E0C51925D9399300236674 /* MainMenuViewModel.swift in Sources */,
 				B8F4AAE125CD6E6900B6F99C /* MLKitPoc.xcdatamodeld in Sources */,

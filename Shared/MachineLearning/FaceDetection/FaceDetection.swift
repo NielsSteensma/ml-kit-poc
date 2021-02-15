@@ -15,7 +15,6 @@ import CoreData
  */
 class FaceDetection {
     typealias FaceDetectionResultsHandler = ((_ results: Result) -> Void)
-    private let faceDetector: FaceDetector
     private static let TAG = "FaceDetection"
 
     struct Result {
@@ -23,22 +22,19 @@ class FaceDetection {
         let faces: [Face]
     }
 
-    init() {
-        let options = FaceDetectorOptions()
-        options.performanceMode = .accurate
-        options.isTrackingEnabled = true
-        self.faceDetector = FaceDetector.faceDetector(options: options)
-    }
-
-    func detect(for image: MLKitImage, dispatchGroup: DispatchGroup) {
+    func detect(for image: MLKitImage, completion: FaceDetectionResultsHandler?) {
         Logger.log(tag: FaceDetection.TAG,
-                   message: "start for image \(image.asset.localIdentifier) " +
-                            "with dimensions of \(image.uiImage.size)")
+                   message: "start for image \(image.asset.localIdentifier) with dimensions of \(image.uiImage.size)")
         let visionImage = VisionImage(image: image.uiImage)
         visionImage.orientation = image.uiImage.imageOrientation
 
-        faceDetector.process(visionImage) { [weak self] faces, error in
-            guard let sSelf = self else {
+
+        guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
+            fatalError("Unable to get FaceDetector")
+        }
+
+        delegate.faceDetector.process(visionImage) { [weak self] faces, error in
+            guard let self = self else {
                 return
             }
 
@@ -47,9 +43,9 @@ class FaceDetection {
                 return
             }
 
-            let results = sSelf.processResults(image: image.uiImage, faces: faces)
-            sSelf.storeResults(mlKitImage: image, results: results)
-            dispatchGroup.leave()
+            let results = self.processResults(image: image.uiImage, faces: faces)
+            self.storeResults(mlKitImage: image, results: results)
+            completion?(results)
         }
     }
 
@@ -99,7 +95,7 @@ class FaceDetection {
                     if detectedFace == nil {
                         detectedFace = DetectedFace(context: context)
                         detectedFace!.trackingId = Int16(face.trackingID)
-
+                        print("faceId \(detectedFace!.trackingId)")
                         // Crop the face from the image
                         let croppedFace = UIImage(cgImage: mlKitImage.uiImage.cgImage!.cropping(to: face.frame)!)
 
