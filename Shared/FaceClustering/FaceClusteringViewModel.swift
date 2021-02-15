@@ -55,7 +55,7 @@ class FaceClusteringViewModel {
         let context = DBHelper.getViewContext()
         context.performAndWait {
             do {
-                let assetCollection =
+                guard let assetCollection =
                     try context.fetchOne(AssetCollection.byLocalIdFetchRequest(localId: phAssetCollection.localIdentifier))!
                 let assetFaces = assetCollection.assetFaces
                 detectedFaceIds = Array(Set(assetFaces.map({$0.detectedFace.trackingId})))
