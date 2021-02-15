@@ -23,7 +23,6 @@ class AssetCollection: NSManagedObject {
         let fetchRequest = AssetCollection.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "localId", collection.localId)
         return NSBatchDeleteRequest(fetchRequest: fetchRequest)
-
     }
 
     static func byLocalIdFetchRequest(localId: String) -> NSFetchRequest<AssetCollection> {

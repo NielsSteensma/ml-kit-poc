@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         return container
     }()
 
-    /// We want to keep this in the app delegate so we work with a single instance, otherwise facetracking may give wrong results
+    /// We want to keep this in the app delegate so we work with a single instance, otherwise face tracking will give wrong results
     lazy var faceDetector: FaceDetector = {
         let options = FaceDetectorOptions()
         options.performanceMode = .accurate
