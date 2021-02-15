@@ -23,7 +23,8 @@ class FaceClusteringViewModel {
     }
 
     func runFaceDetection(completion: @escaping () -> Void) {
-        faceDetectionRunner.run(for: phAssetCollection) {
+        faceDetectionRunner.run(for: phAssetCollection) { [weak self] in
+            self?.loadData()
             DispatchQueue.main.async {
                 completion()
             }
@@ -47,35 +48,24 @@ class FaceClusteringViewModel {
     }
 
     func loadData() {
-        updateSections()
-        updateAssetFaces()
-    }
-
-    private func updateSections() {
         let context = DBHelper.getViewContext()
-        context.performAndWait {
-            do {
-                guard let assetCollection =
-                    try context.fetchOne(AssetCollection.byLocalIdFetchRequest(localId: phAssetCollection.localIdentifier))!
-                let assetFaces = assetCollection.assetFaces
-                detectedFaceIds = Array(Set(assetFaces.map({$0.detectedFace.trackingId})))
-            } catch {
-                fatalError(error.localizedDescription)
+        do {
+            // Load the collection
+            let assetCollectionFetchRequest = AssetCollection.byLocalIdFetchRequest(localId: phAssetCollection.localIdentifier)
+            guard let assetCollection = try context.fetchOne(assetCollectionFetchRequest) else {
+                return
             }
-        }
-    }
 
-    private func updateAssetFaces(){
-        let context = DBHelper.getViewContext()
-        context.performAndWait {
+            // Set all unique face ids found for the collection
+            detectedFaceIds = Array(Set(assetCollection.assetFaces.map({$0.detectedFace.trackingId})))
+
+            // For each face id fetch the assets of the collection
             for detectedFaceId in detectedFaceIds {
-                do {
-                    let detectedFace = try context.fetchOne(DetectedFace.bytrackingIdFetchRequest(trackingId: detectedFaceId))!
-                    assetFaces[detectedFaceId] = Array(detectedFace.assetFaces)
-                } catch {
-                    fatalError(error.localizedDescription)
-                }
+                let detectedFace = try context.fetchOne(DetectedFace.bytrackingIdFetchRequest(trackingId: detectedFaceId))!
+                assetFaces[detectedFaceId] = Array(detectedFace.assetFaces)
             }
+        } catch {
+            fatalError(error.localizedDescription)
         }
     }
 }

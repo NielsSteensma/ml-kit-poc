@@ -15,7 +15,7 @@ class DetectedFaceAssetsViewModel {
         let context = DBHelper.getViewContext()
         do {
             assets = try context.fetch(AssetFaces.byDetectedFaceFetchRequest(detectedFace: detectedFace))
-        } catch{
+        } catch {
             fatalError(error.localizedDescription)
         }
     }
