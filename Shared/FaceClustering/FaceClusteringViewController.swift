@@ -85,6 +85,15 @@ class FaceClusteringViewController: UICollectionViewController {
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        if(viewModel.detectedFaceIds.isEmpty) {
+            let emptyStateLabel = UITextView()
+            emptyStateLabel.text = "No analysis data present. Click on top right icon to run a new analysis!"
+            emptyStateLabel.sizeToFit()
+            emptyStateLabel.textContainerInset =  UIEdgeInsets(top: 128, left: 32, bottom: 0, right: 32)
+            collectionView.backgroundView = emptyStateLabel
+        } else {
+            collectionView.backgroundView = nil
+        }
         return viewModel.detectedFaceIds.count
     }
 
@@ -105,7 +114,7 @@ class FaceClusteringViewController: UICollectionViewController {
         }
 
         let faceId = viewModel.detectedFaceIds[indexPath.section]
-        let image = viewModel.fetchFaceImage(trackingId: faceId)
+        let image = viewModel.fetchFaceImage(faceId: faceId)
         faceHeader.setData(faceId: faceId, image: image)
         return faceHeader
     }

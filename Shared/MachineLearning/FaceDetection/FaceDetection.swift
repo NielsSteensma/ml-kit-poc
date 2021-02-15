@@ -91,18 +91,15 @@ class FaceDetection {
             do {
                 // Create each detected face if it doesn't yet exist
                 for face in result.faces {
-                    var detectedFace = try context.fetch(DetectedFace.bytrackingIdFetchRequest(trackingId: Int16(face.trackingID))).first
+                    var detectedFace = try context.fetch(DetectedFace.byFaceIdFetchRequest(faceId: Int16(face.trackingID))).first
                     if detectedFace == nil {
                         detectedFace = DetectedFace(context: context)
-                        detectedFace!.trackingId = Int16(face.trackingID)
-                        print("faceId \(detectedFace!.trackingId)")
+                        detectedFace!.faceId = Int16(face.trackingID)
                         // Crop the face from the image
                         let croppedFace = UIImage(cgImage: mlKitImage.uiImage.cgImage!.cropping(to: face.frame)!)
 
                         // Save the cropped face in db ( not great )
                         detectedFace!.imageJpegData = croppedFace.jpegData(compressionQuality: 1.0)!
-                    } else {
-
                     }
 
                     let assetFaces = AssetFaces(context: context)
@@ -110,7 +107,6 @@ class FaceDetection {
                     assetFaces.assetCollection = mlKitImage.assetCollection
                     assetFaces.detectedFace = detectedFace!
                     try context.save()
-
                 }
 
             } catch {

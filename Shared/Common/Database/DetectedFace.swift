@@ -13,7 +13,7 @@ import CoreData
  */
 @objc(DetectedFace)
 final class DetectedFace: NSManagedObject {
-    @NSManaged var trackingId: Int16
+    @NSManaged var faceId: Int16
     @NSManaged var assetFaces: Set<AssetFaces>
     @NSManaged var imageJpegData: Data
 
@@ -21,9 +21,9 @@ final class DetectedFace: NSManagedObject {
         return NSBatchDeleteRequest(fetchRequest: DetectedFace.fetchRequest())
     }
 
-    static func bytrackingIdFetchRequest(trackingId: Int16) -> NSFetchRequest<DetectedFace> {
+    static func byFaceIdFetchRequest(faceId: Int16) -> NSFetchRequest<DetectedFace> {
         let fetchRequest = DetectedFace.fetchRequest() as! NSFetchRequest<DetectedFace>
-        fetchRequest.predicate = NSPredicate(format: "trackingId == %d", trackingId)
+        fetchRequest.predicate = NSPredicate(format: "faceId == %d", faceId)
         return fetchRequest
     }
 }

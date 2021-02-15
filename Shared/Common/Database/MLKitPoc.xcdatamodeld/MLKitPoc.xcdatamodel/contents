@@ -22,8 +22,8 @@
         <relationship name="detectedFace" maxCount="1" deletionRule="Cascade" destinationEntity="DetectedFace" inverseName="assetFaces" inverseEntity="DetectedFace"/>
     </entity>
     <entity name="DetectedFace" representedClassName=".DetectedFace" syncable="YES">
+        <attribute name="faceId" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="imageJpegData" optional="YES" attributeType="Binary"/>
-        <attribute name="trackingId" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="assetFaces" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AssetFaces" inverseName="detectedFace" inverseEntity="AssetFaces"/>
     </entity>
     <elements>

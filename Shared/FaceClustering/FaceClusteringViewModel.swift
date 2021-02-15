@@ -31,10 +31,10 @@ class FaceClusteringViewModel {
         }
     }
 
-    func fetchFaceImage(trackingId: Int16) -> UIImage {
+    func fetchFaceImage(faceId: Int16) -> UIImage {
         let context = DBHelper.getViewContext()
         do {
-            let detectedFace = try context.fetchOne(DetectedFace.bytrackingIdFetchRequest(trackingId: trackingId))
+            let detectedFace = try context.fetchOne(DetectedFace.byFaceIdFetchRequest(faceId: faceId))
             return UIImage(data: detectedFace!.imageJpegData)!
         } catch {
             fatalError(error.localizedDescription)
@@ -57,12 +57,11 @@ class FaceClusteringViewModel {
             }
 
             // Set all unique face ids found for the collection
-            detectedFaceIds = Array(Set(assetCollection.assetFaces.map({$0.detectedFace.trackingId})))
+            detectedFaceIds = Array(Set(assetCollection.assetFaces.map({$0.detectedFace.faceId})))
 
             // For each face id fetch the assets of the collection
             for detectedFaceId in detectedFaceIds {
-                let detectedFace = try context.fetchOne(DetectedFace.bytrackingIdFetchRequest(trackingId: detectedFaceId))!
-                assetFaces[detectedFaceId] = Array(detectedFace.assetFaces)
+                assetFaces[detectedFaceId] = Array(assetCollection.assetFaces.filter({$0.detectedFace.faceId == detectedFaceId}))
             }
         } catch {
             fatalError(error.localizedDescription)
