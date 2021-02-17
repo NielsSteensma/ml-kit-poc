@@ -16,6 +16,10 @@ class ThumbnailViewCell: UICollectionViewCell {
     static let identifier = "ThumbnailViewCell"
     static let unwrapError = "Unable to find image thumbnail view cell"
 
+    override func prepareForReuse() {
+        self.thumbnail.image = nil
+    }
+    
     func configure(for thumbnailImage: UIImage) {
         self.thumbnail.image = thumbnailImage
     }

@@ -14,8 +14,7 @@ import CoreData
 @objc(Asset)
 final class Asset: NSManagedObject {
     @NSManaged var localId: String
-    @NSManaged var amountOfFaces: Int16
-    @NSManaged var faceId: Int16
+    @NSManaged var assetCollection: AssetCollection
 
     static var batchDeleteRequest: NSBatchDeleteRequest {
         return NSBatchDeleteRequest(fetchRequest: Asset.fetchRequest())

@@ -15,4 +15,13 @@ extension NSManagedObjectContext {
     func fetchOne<T>(_ request: NSFetchRequest<T>) throws -> T? where T : NSFetchRequestResult {
         try self.fetch(request).first
     }
+
+    func executeAndMergeChanges(using batchDeleteRequest: NSBatchDeleteRequest) throws {
+        shouldDeleteInaccessibleFaults = true
+        batchDeleteRequest.resultType = .resultTypeObjectIDs
+        let result = try execute(batchDeleteRequest) as? NSBatchDeleteResult
+        let objectIDArray = result?.result as? [NSManagedObjectID]
+        let changes = [NSDeletedObjectsKey : objectIDArray]
+        NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes as [AnyHashable : Any], into: [self])
+    }
 }

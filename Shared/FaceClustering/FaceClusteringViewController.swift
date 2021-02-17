@@ -27,8 +27,7 @@ class FaceClusteringViewController: UICollectionViewController {
         collectionView.register(UINib(nibName: FaceHeader.identifier, bundle: Bundle.main),
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: FaceHeader.identifier)
-        
-        resetCachedAssets()
+
         PHPhotoLibrary.shared().register(self)
         viewModel.loadData()
     }
@@ -61,7 +60,6 @@ class FaceClusteringViewController: UICollectionViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        updateCachedAssets()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -119,50 +117,6 @@ class FaceClusteringViewController: UICollectionViewController {
         return faceHeader
     }
 
-    
-    // MARK: UIScrollView
-    
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        updateCachedAssets()
-    }
-    
-    // MARK: Asset Caching
-    
-    fileprivate func resetCachedAssets() {
-        imageManager.stopCachingImagesForAllAssets()
-        previousPreheatRect = .zero
-    }
-    /// - Tag: UpdateAssets
-    fileprivate func updateCachedAssets() {
-        // Update only if the view is visible.
-        guard isViewLoaded && view.window != nil else { return }
-        
-        // The window you prepare ahead of time is twice the height of the visible rect.
-        let visibleRect = CGRect(origin: collectionView!.contentOffset, size: collectionView!.bounds.size)
-        let preheatRect = visibleRect.insetBy(dx: 0, dy: -0.5 * visibleRect.height)
-        
-        // Update only if the visible area is significantly different from the last preheated area.
-        let delta = abs(preheatRect.midY - previousPreheatRect.midY)
-        guard delta > view.bounds.height / 3 else { return }
-        
-        // Compute the assets to start and stop caching.
-        let (addedRects, removedRects) = differencesBetweenRects(previousPreheatRect, preheatRect)
-        let addedAssets = addedRects
-            .flatMap { rect in collectionView!.indexPathsForElements(in: rect) }
-            .map { indexPath in fetchResult.object(at: indexPath.item) }
-        let removedAssets = removedRects
-            .flatMap { rect in collectionView!.indexPathsForElements(in: rect) }
-            .map { indexPath in fetchResult.object(at: indexPath.item) }
-        
-        // Update the assets the PHCachingImageManager is caching.
-        imageManager.startCachingImages(for: addedAssets,
-                                        targetSize: thumbnailSize, contentMode: .aspectFill, options: nil)
-        imageManager.stopCachingImages(for: removedAssets,
-                                       targetSize: thumbnailSize, contentMode: .aspectFill, options: nil)
-        // Store the computed rectangle for future comparison.
-        previousPreheatRect = preheatRect
-    }
-    
     fileprivate func differencesBetweenRects(_ old: CGRect, _ new: CGRect) -> (added: [CGRect], removed: [CGRect]) {
         if old.intersects(new) {
             var added = [CGRect]()
@@ -243,7 +197,6 @@ extension FaceClusteringViewController: PHPhotoLibraryChangeObserver {
                 // Reload the collection view if incremental changes are not available.
                 collectionView.reloadData()
             }
-            resetCachedAssets()
         }
     }
 }

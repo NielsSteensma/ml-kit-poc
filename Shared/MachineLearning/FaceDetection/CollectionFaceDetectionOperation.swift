@@ -16,8 +16,9 @@ class CollectionFaceDetectionOperation: ConcurrentOperation {
     private static let TAG = "CollectionFaceDetectionOperation"
     private let phAssetCollection: PHAssetCollection
     private var assetCollection: AssetCollection!
-    private let faceDetection = FaceDetection()
+    private let faceDetection = AssetFaceDetection()
     private var assets = [PHAsset]()
+    private var count = 0
 
     init(for phAssetCollection: PHAssetCollection) {
         self.phAssetCollection = phAssetCollection
@@ -28,10 +29,9 @@ class CollectionFaceDetectionOperation: ConcurrentOperation {
         Logger.log(tag: CollectionFaceDetectionOperation.TAG,
                    message: "Start run for asset collection: \(phAssetCollection.localizedTitle ?? "")")
 
-        createOrFetchAssetCollection(localId: phAssetCollection.localIdentifier) { collection in
+        createOrFetchAssetCollection(collection: phAssetCollection) { collection in
             assetCollection = collection
             let fetchResult = PHAsset.fetchAssets(in: phAssetCollection, options: nil)
-
             guard fetchResult.count > 0 else {
                 Logger.log(tag: CollectionFaceDetectionOperation.TAG,
                            message: "Finish run for empty asset collection: \(phAssetCollection.localizedTitle ?? "")")
@@ -53,6 +53,7 @@ class CollectionFaceDetectionOperation: ConcurrentOperation {
         guard let asset = assets.first else {
             Logger.log(tag: CollectionFaceDetectionOperation.TAG,
                        message: "Finish run for asset collection: \(phAssetCollection.localizedTitle ?? "")")
+            print("DetectedFaces \(count)")
             completeOperation()
             return
         }
@@ -65,37 +66,44 @@ class CollectionFaceDetectionOperation: ConcurrentOperation {
     }
 
     private func analyse(asset: PHAsset, assetCollection: AssetCollection, completion: @escaping CompletionHandler) {
-        PHImageManager.default().requestImageForFaceDetection(for: asset) { [weak self] image in
+        PHImageManager.default().requestImageForFaceDetectionNew(for: asset) { [weak self] image in
             guard let self = self, let image = image else {
                 return
             }
 
             let mlKitImage = MLKitImage(uiImage: image, asset: asset, assetCollection: assetCollection)
-            self.faceDetection.detect(for: mlKitImage) { _ in
+            self.faceDetection.detect(for: mlKitImage) { [weak self] count in
+                self?.count = self!.count + count
                 completion()
             }
         }
     }
 
-    private func createOrFetchAssetCollection(localId: String, completion: (_ assetCollection: AssetCollection) -> Void) {
+    private func createOrFetchAssetCollection(collection: PHAssetCollection, completion: (_ assetCollection: AssetCollection) -> Void) {
+        let localId = collection.localIdentifier
         let context = DBHelper.getViewContext()
-        do {
-            let existingCollection = try context.fetchOne(AssetCollection.byLocalIdFetchRequest(localId: localId))
+        context.performAndWait {
+            do {
+                let existingCollection = try context.fetchOne(AssetCollection.byLocalIdFetchRequest(localId: localId))
 
-            if let assetCollection = existingCollection {
-                Logger.log(tag: CollectionFaceDetectionOperation.TAG, message: "Found existing collection \(localId)")
+                if let assetCollection = existingCollection {
+                    Logger.log(tag: CollectionFaceDetectionOperation.TAG, message: "Found existing collection \(localId)")
+                    completion(assetCollection)
+                    return
+                }
+
+                let assetCollection = AssetCollection(context: context)
+                assetCollection.localId = collection.localIdentifier
+                if let collectionName = collection.localizedTitle {
+                    assetCollection.name = collectionName
+                }
+                Logger.log(tag: CollectionFaceDetectionOperation.TAG, message: "Created collection \(localId)")
                 completion(assetCollection)
                 return
             }
-
-            let assetCollection = AssetCollection(context: context)
-            assetCollection.localId = localId
-            Logger.log(tag: CollectionFaceDetectionOperation.TAG, message: "Created collection \(localId)")
-            completion(assetCollection)
-            return
-        }
-        catch {
-            fatalError(error.localizedDescription)
+            catch {
+                fatalError(error.localizedDescription)
+            }
         }
     }
 }

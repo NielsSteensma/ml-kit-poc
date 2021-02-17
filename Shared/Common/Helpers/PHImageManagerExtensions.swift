@@ -21,14 +21,40 @@ extension PHImageManager {
      */
     func requestImageForFaceDetection(for asset: PHAsset, completion: @escaping ImageRequestCompletionHandler) {
         let options = PHImageRequestOptions()
+        options.isSynchronous = true
         options.deliveryMode = .highQualityFormat // Beware: .opportunistic results in double completion handler calls
         options.resizeMode = .none
         options.isNetworkAccessAllowed = true
         self.requestImage(for: asset,
                           targetSize: PHImageManagerMaximumSize,
                           contentMode: .aspectFit,
-                          options: options) { (image, _) in
+                          options: options) { (image, info) in
             completion(image)
+        }
+    }
+
+    /**
+     Requests the original image for the asset from Apple Photos.
+     */
+    func requestImageForFaceDetectionNew(for asset: PHAsset, completion: @escaping ImageRequestCompletionHandler) {
+        let options = PHImageRequestOptions()
+        //options.isSynchronous = true
+        options.deliveryMode = .highQualityFormat // Beware: .opportunistic results in double completion handler calls
+        options.resizeMode = .none
+        options.isNetworkAccessAllowed = true
+        options.version = .current
+        if #available(iOS 13, *) {
+            self.requestImageDataAndOrientation(for: asset,
+                                                options: options) { (data, _, orientation, _) in
+                let imageWithoutOrientation = UIImage(data: data!)
+                let uiImageOrientation = orientation.convertToUIImageOrientation()
+                completion(UIImage(cgImage: (imageWithoutOrientation?.cgImage!)!,
+                                   scale: 1.0, orientation: uiImageOrientation))
+            }
+        } else {
+            self.requestImageForFaceDetection(for: asset){ image in
+                completion(image)
+            }
         }
     }
 

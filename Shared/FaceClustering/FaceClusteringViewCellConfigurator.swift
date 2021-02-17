@@ -27,23 +27,5 @@ class FaceClusteringViewCellConfigurator {
                 cell.thumbnailImage = image
             }
         }
-
-        setMLKitResults(asset: asset, cell: cell)
-    }
-
-    private func setMLKitResults(asset: PHAsset, cell: FaceClusteringViewCell){
-        let context = DBHelper.getViewContext()
-        context.perform {
-            do {
-                let fetchRequest = Asset.byLocalAssetIdFetchRequest(localAssetId: asset.localIdentifier)
-                let foundAsset = try context.fetchOne(fetchRequest)
-                if let asset = foundAsset {
-                    cell.faces.text = asset.amountOfFaces != 0 ? String(asset.amountOfFaces) : ""
-                }
-                cell.layoutIfNeeded()
-            } catch {
-                fatalError(error.localizedDescription)
-            }
-        }
     }
 }
